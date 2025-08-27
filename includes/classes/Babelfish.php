@@ -134,10 +134,10 @@ class Babelfish {
 
 		// If we have already translated this page (babelfish=en_fr), then don't display the strings again
 		if (!isset($fishes[$lang_from]) || isset($_GET['babelfish'])) {
-			return array();
+			return [];
 		}
 
-		$a = array();
+		$a = [];
 		foreach ($fishes[$lang_from] as $lang_to => $msg) {
 			$a[] = array('target' => $lang_to,
                          'href'   => Babelfish::url($lang_from, $lang_to),

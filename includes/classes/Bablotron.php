@@ -67,7 +67,7 @@ class Bablotron extends BitBase
     function spellcheck_text($text, $threshold = 5)
     {
         $words = preg_split("/\s/", $text);
-        $results = array();
+        $results = [];
         foreach ($words as $word)
         {
             if (!$this->word_exists($word))
@@ -85,7 +85,7 @@ class Bablotron extends BitBase
     */
     function spellcheck_word($word, $threshold = 5)
     {
-        $results = array();
+        $results = [];
         if (!$this->word_exists($word))
         {
             $results[$word] = $this->find_similar_words($word, $threshold);
@@ -101,7 +101,7 @@ class Bablotron extends BitBase
     function quick_spellcheck_text($text, $threshold = 5)
     {
         $words = preg_split("/\s/", $text);
-        $results = array();
+        $results = [];
         foreach ($words as $word)
         {
             if (!$this->word_exists($word))
@@ -119,7 +119,7 @@ class Bablotron extends BitBase
     */
     function find_similar_words($word, $threshold)
     {
-        $similar = array();
+        $similar = [];
         $tbl = 'babl_words_' . $this->lan;
         $word = addslashes( ( trim( $word ) ) );
         $sndx = substr($word, 0, 2);

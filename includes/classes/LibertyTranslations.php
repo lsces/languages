@@ -6,21 +6,25 @@
  * @author ?
  */
 
-/**
+namespace Bitweaver\Languages;
+use Bitweaver\BitBase;
+use Bitweaver\Liberty\LibertyBase;
+
+ /**
  * @package languages
  */
  class LibertyTranslations extends LibertyBase {
-	function __construct( $pContentId = NULL ) {
+	public function __construct( $pContentId = null ) {
 		$this->mContentId = $pContentId;
 		parent::__construct();
 	}
 
-	function getContentTranslations() {
+	public function getContentTranslations() {
 		global $gBitSystem, $gBitLanguage;
-		$ret = array();
-		if( @BitBase::verifyId( $this->mContentId ) ) {
+		$ret = [];
+		if( BitBase::verifyId( $this->mContentId ) ) {
 			$translationId = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", array( $this->mContentId ) );
-			if( @BitBase::verifyId( $translationId ) ) {
+			if( BitBase::verifyId( $translationId ) ) {
 				$query = "SELECT lc.`content_id`, lc.`title`, lc.`lang_code`, ictm.`translation_id`
 					FROM `".BIT_DB_PREFIX."i18n_content_trans_map` ictm
 						INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id`=ictm.`content_id` )
@@ -38,10 +42,10 @@
 		return $ret;
 	}
 
-	function storeTranslation( $pParamHash ) {
+	public function storeTranslation( $pParamHash ) {
 		if( $this->verify( $pParamHash ) ) {
 			$table = BIT_DB_PREFIX."i18n_content_trans_map";
-			if( !@BitBase::verifyId( $pParamHash['translation_store']['translation_id'] ) && is_array( $pParamHash['translation_store'] ) ) {
+			if( !BitBase::verifyId( $pParamHash['translation_store']['translation_id'] ?? 0 ) && is_array( $pParamHash['translation_store'] ) ) {
 				foreach( $pParamHash['translation_store'] as $store ) {
 					$result = $this->mDb->associateInsert( $table, $store );
 				}
@@ -51,11 +55,11 @@
 		}
 	}
 
-	function verify( &$pParamHash ) {
+	public function verify( array &$pParamHash ): bool {
 		$i = 0;
 
 		// make sure we don't have a translation_id for this content yet
-		if( @BitBase::verifyId( $pParamHash['from_id'] ) ) {
+		if( BitBase::verifyId( $pParamHash['from_id'] ?? 0 ) ) {
 			$pParamHash['translation_id'] = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", array( $pParamHash['from_id'] ) );
 		}
 
@@ -63,10 +67,10 @@
 		// in theory, this shouldn't happen, but there might be a situation where we end up with 2 users translating the same page at the same time. (is this true?)
 
 		// if we have a translation_id, we add this content to the same group of translations
-		if( @BitBase::verifyId( $pParamHash['translation_id'] ) ) {
+		if( BitBase::verifyId( $pParamHash['translation_id'] ?? 0 ) ) {
 			$pParamHash['translation_store']['translation_id']     = $pParamHash['translation_id'];
 			$pParamHash['translation_store']['content_id']         = $pParamHash['content_id'];
-		} elseif( @BitBase::verifyId( $pParamHash['from_id'] ) ) {
+		} elseif( BitBase::verifyId( $pParamHash['from_id'] ?? 0 ) ) {
 			// we have a from_id but no translation_id, this is a new entry in the translation map and we need both, the original and the new content_id entered
 			// we can simply use the from_id as the translation_id
 			$pParamHash['translation_store'][$i]['translation_id'] = $pParamHash['from_id'];
@@ -75,13 +79,14 @@
 			$pParamHash['translation_store'][$i]['translation_id'] = $pParamHash['from_id'];
 			$pParamHash['translation_store'][$i]['content_id']     = $pParamHash['content_id'];
 		}
-		return( count( $this->mErrors ) == 0 );
+		return count( $this->mErrors ) == 0;
 	}
 
-	function expunge() {
-		if( @BitBase::verifyId( $this->mContentId ) ) {
+	public function expunge(): bool {
+		if( BitBase::verifyId( $this->mContentId ) ) {
 			$result = $this->mDb->query( "DELETE FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", $this->mContentId );
 		}
+		return true;
 	}
 }
 
@@ -103,7 +108,7 @@ function translation_content_display( &$pObject ) {
 function translation_content_edit( &$pObject, &$pParamHash ) {
 	global $gBitLanguage, $gBitSmarty, $gBitUser;
 	$trans = new LibertyTranslations( $pObject->mContentId );
-	$translationId = NULL;
+	$translationId = null;
 	$translations = $trans->getContentTranslations();
 	foreach( $gBitLanguage->mLanguageList as $lang_code => $language ) {
 		$translationsList[$lang_code] = $language;
@@ -116,10 +121,10 @@ function translation_content_edit( &$pObject, &$pParamHash ) {
 	$gBitSmarty->assign( 'translationsList', $translationsList );
 	$gBitSmarty->assign( 'translationId', $translationId );
 
-	if( @BitBase::verifyId( $_REQUEST['i18n']['from_id'] ) ) {
+	if( BitBase::verifyId( $_REQUEST['i18n']['from_id'] ?? 0 ) ) {
 		// load the content we're translating from
 		$transObject = LibertyBase::getLibertyObject( $_REQUEST['i18n']['from_id'] );
-		$gBitSmarty->assignByRef( "translateFrom", $transObject );
+		$gBitSmarty->assign( "translateFrom", $transObject );
 
 		// attempt google translation
 		if( !empty( $_REQUEST['i18n']['google'] ) && !empty( $transObject->mInfo['data'] )) {
@@ -152,7 +157,7 @@ die;
 function translation_content_store( $pObject, $pParamHash ) {
 	// if we are creating this content and we have a from_id, we know that we're translating a page
 	// mInfo['content_id'] isn't set when content is created
-	if( empty( $pObject->mInfo['content_id'] ) && @BitBase::verifyId( $_REQUEST['i18n']['from_id'] ) ) {
+    if( empty( $pObject->mInfo['content_id'] ) && BitBase::verifyId( $_REQUEST['i18n']['from_id'] ?? 0 ) ) {
 		$trans = new LibertyTranslations();
 		$storeHash = $_REQUEST['i18n'];
 		$storeHash['content_id'] = $pParamHash['content_id'];
@@ -162,8 +167,7 @@ function translation_content_store( $pObject, $pParamHash ) {
 	}
 }
 
-function translation_content_exunge( $pObject, $pParamHash ) {
+function translation_content_expunge( $pObject, $pParamHash ) {
 	$trans = new LibertyTranslations( $pObject->mContentId );
 	$trans->expunge();
 }
-?>
