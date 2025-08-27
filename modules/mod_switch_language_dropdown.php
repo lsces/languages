@@ -10,8 +10,8 @@ global $gBitLanguage, $gBitUser;
 //vd($_COOKIE);
 //vd($_SESSION);
 $sel_lang = !empty( $gBitUser->mInfo['bitlanguage'] ) ? $gBitUser->mInfo['bitlanguage'] : $gBitLanguage->mLanguage;
-$_template->tpl_vars['sel_lang'] = new Smarty_variable( $sel_lang );
-$languages = array();
-$languages = $gBitLanguage->listLanguages( FALSE );
-$_template->tpl_vars['languages'] = new Smarty_variable( $languages);
+$gBitSmarty->assign( 'sel_lang', $sel_lang );
+$languages = [];
+$languages = $gBitLanguage->listLanguages( false );
+$gBitSmarty->assign( 'languages', $languages);
 ?>
