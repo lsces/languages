@@ -9,38 +9,41 @@
  * @copyright  Copyright (c) 2008, bitweaver.org
  */
 
+namespace Bitweaver\Liberty;
+use Bitweaver\KernelTools;
+use Bitweaver\Liberty\LibertyContent;
+
 /**
  * Setup Code
  */
 define( 'PLUGIN_GUID_DATATR', 'datatr' );
 global $gLibertySystem;
-$pluginParams = array (
+$pluginParams = [
 	'tag'           => 'tr',
-	'auto_activate' => FALSE,
-	'requires_pair' => TRUE,
+	'auto_activate' => false,
+	'requires_pair' => true,
 	'load_function' => 'data_tr',
 	'title'         => 'Translate',
 	'help_page'     => 'DataPluginTR',
-	'description'   => tra( "Use this plugin to mark strings for translation. You should only use this for common short strings, and not entire pages." ),
+	'description'   => KernelTools::tra( "Use this plugin to mark strings for translation. You should only use this for common short strings, and not entire pages." ),
 	'help_function' => 'data_tr_help',
-	'syntax'        => "{tr}",
+	'syntax'        => "",
 	'plugin_type'   => DATA_PLUGIN
-);
+];
 $gLibertySystem->registerPlugin( PLUGIN_GUID_DATATR, $pluginParams );
 $gLibertySystem->registerDataTag( $pluginParams['tag'], PLUGIN_GUID_DATATR );
 
 function data_tr_help() {
-	$help = tra( "Example: " ) . "{tr}string of text to be translated{/tr}";
+	$help = KernelTools::tra( "Example: " ) . "string of text to be translated";
 	return $help;
 }
 
 function data_tr( $pData, $pParams, $pCommonObject ) {
 	$transString = tra( $pData );
 	$parseHash = $pCommonObject->mInfo;
-	$parseHash['no_cache'] = TRUE;
+	$parseHash['no_cache'] = true;
 	$parseHash['data'] = $transString;
 	$parsedData = LibertyContent::parseDataHash( $parseHash );
 	$parsedData = preg_replace( '|<br\s*/?>$|', '', $parsedData );
 	return $parsedData;
 }
-?>

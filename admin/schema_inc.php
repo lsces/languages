@@ -1,6 +1,6 @@
 <?php
 
-$tables = array(
+$tables = [ 
 
 'i18n_languages' => "
 	lang_code C(32) PRIMARY,
@@ -35,51 +35,51 @@ $tables = array(
 	CONSTRAINT ', CONSTRAINT `liberty_translation_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content`( `content_id` )'
 ",
 
-);
+];
 
 global $gBitInstaller;
 
 foreach( array_keys( $tables ) AS $tableName ) {
-	$gBitInstaller->registerSchemaTable( LANGUAGES_PKG_NAME, $tableName, $tables[$tableName], TRUE );
+	$gBitInstaller->registerSchemaTable( LANGUAGES_PKG_NAME, $tableName, $tables[$tableName], true );
 }
 
-$indices = array (
-	'i18n_masters_pkg_idx' => array( 'table' => 'i18n_masters', 'cols' => 'package', 'opts' => NULL ),
-	'i18n_masters_created_idx' => array( 'table' => 'i18n_masters', 'cols' => 'created', 'opts' => NULL ),
-	'i18n_strings_lang_idx' => array( 'table' => 'i18n_strings', 'cols' => 'lang_code', 'opts' => NULL ),
-	'i18n_strings_lang_idx' => array( 'table' => 'i18n_strings', 'cols' => 'source_hash', 'opts' => NULL ),
-	'i18n_strings_modif_idx' => array( 'table' => 'i18n_strings', 'cols' => 'last_modified', 'opts' => NULL ),
-	'i18n_version_src_idx' => array( 'table' => 'i18n_version_map', 'cols' => 'source_hash', 'opts' => NULL ),
-	'i18n_version_ver_idx' => array( 'table' => 'i18n_version_map', 'cols' => 'version', 'opts' => NULL  ),
-);
+$indices = [
+	'i18n_masters_pkg_idx' => [  'table' => 'i18n_masters', 'cols' => 'package', 'opts' => null ],
+	'i18n_masters_created_idx' => [  'table' => 'i18n_masters', 'cols' => 'created', 'opts' => null ],
+	'i18n_strings_lang_idx' => [  'table' => 'i18n_strings', 'cols' => 'lang_code', 'opts' => null ],
+	'i18n_strings_source_idx' => [  'table' => 'i18n_strings', 'cols' => 'source_hash', 'opts' => null ],
+	'i18n_strings_modif_idx' => [  'table' => 'i18n_strings', 'cols' => 'last_modified', 'opts' => null ],
+	'i18n_version_src_idx' => [  'table' => 'i18n_version_map', 'cols' => 'source_hash', 'opts' => null ],
+	'i18n_version_ver_idx' => [  'table' => 'i18n_version_map', 'cols' => 'version', 'opts' => null ],
+];
 $gBitInstaller->registerSchemaIndexes( LANGUAGES_PKG_NAME, $indices );
 
 // ### Sequences
 //$sequences = array (
-//	'i18n_content_trans_id_seq' => array( 'start' => 1 ),
+//	'i18n_content_trans_id_seq' => [  'start' => 1 ],
 //);
 //$gBitInstaller->registerSchemaSequences( LIBERTY_PKG_NAME, $sequences );
 
-$gBitInstaller->registerPackageInfo( LANGUAGES_PKG_NAME, array(
+$gBitInstaller->registerPackageInfo( LANGUAGES_PKG_NAME, [ 
 	'description' => "This package allows you to translate your site into a different language.",
 	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>',
-) );
+] );
 
 // ### Default Preferences
-$gBitInstaller->registerPreferences( LANGUAGES_PKG_NAME, array(
-	array( LANGUAGES_PKG_NAME, 'i18n_record_untranslated','y' ),
-) );
+$gBitInstaller->registerPreferences( LANGUAGES_PKG_NAME, [ 
+	[  LANGUAGES_PKG_NAME, 'i18n_record_untranslated','y' ],
+] );
 
 // ### Default UserPermissions
-$gBitInstaller->registerUserPermissions( LANGUAGES_PKG_NAME, array(
-	array('p_languages_create', 'Can create new languages', 'admin', LANGUAGES_PKG_NAME),
-	array('p_languages_edit', 'Can edit translations', 'editors', LANGUAGES_PKG_NAME),
-	array('p_languages_delete', 'Can delete languages', 'admin', LANGUAGES_PKG_NAME),
-	array('p_languages_edit_master', 'Can edit master translation strings', 'admin', LANGUAGES_PKG_NAME),
-	array('p_languages_import', 'Can import and export language files', 'editors', LANGUAGES_PKG_NAME),
-) );
+$gBitInstaller->registerUserPermissions( LANGUAGES_PKG_NAME, [ 
+	[ 'p_languages_create', 'Can create new languages', 'admin', LANGUAGES_PKG_NAME],
+	[ 'p_languages_edit', 'Can edit translations', 'editors', LANGUAGES_PKG_NAME],
+	[ 'p_languages_delete', 'Can delete languages', 'admin', LANGUAGES_PKG_NAME],
+	[ 'p_languages_edit_master', 'Can edit master translation strings', 'admin', LANGUAGES_PKG_NAME],
+	[ 'p_languages_import', 'Can import and export language files', 'editors', LANGUAGES_PKG_NAME],
+] );
 
-$gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, array(
+$gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, [ 
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`,`right_to_left`) VALUES ('ar', 'ﺎﻠﻋﺮﺒﻳﺓ', 'Arabic','y' )",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('ca', 'Català', 'Catalan')",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('cs', 'Český', 'Czech')",
@@ -119,13 +119,12 @@ $gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, array(
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('uk', 'Українська', 'Ukrainian')",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`,`right_to_left`) VALUES ('ur', 'اردو', 'Urdu', 'y')",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('zh-cn', '简体中文', 'Chinese')",
-) );
+] );
 
 // Package requirements
-$gBitInstaller->registerRequirements( LANGUAGES_PKG_NAME, array(
-	'liberty'   => array( 'min' => '2.1.4' ),
-	'users'     => array( 'min' => '2.1.0' ),
-	'kernel'    => array( 'min' => '2.0.0' ),
-	'themes'    => array( 'min' => '2.0.0' ),
-));
-?>
+$gBitInstaller->registerRequirements( LANGUAGES_PKG_NAME, [ 
+	'liberty'   => [ 'min' => '5.0.0' ],
+	'users'     => [ 'min' => '5.0.0' ],
+	'kernel'    => [ 'min' => '5.0.0' ],
+	'themes'    => [ 'min' => '5.0.0' ],
+] );

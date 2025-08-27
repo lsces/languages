@@ -11,7 +11,7 @@ $formLanguageToggles = array(
 	),
 	'i18n_interactive_translation' => array(
 		'label' => 'Interactive Translations',
-		'note' => 'This will help you translate your site very effitiently by giving you direct access to the correct translation page.<br />Once you are done translating, make sure you turn this feature off and clear the language cache.<br />This feature only works when you set <em>$smarty_force_compile</em> to TRUE in your <em>config/kernel/config_inc.php</em> file',
+		'note' => 'This will help you translate your site very effitiently by giving you direct access to the correct translation page.<br />Once you are done translating, make sure you turn this feature off and clear the language cache.<br />This feature only works when you set <em>$smarty_force_compile</em> to true in your <em>config/kernel/config_inc.php</em> file',
 		'page' => 'TranslationTutorial',
 		'link' => array(
 			'title' => 'Language cache',
@@ -49,7 +49,7 @@ if( isset( $_REQUEST["prefs"] )) {
 		"bitlanguage",
 	);
 	foreach( $pref_byref_values as $britem ) {
-		byref_set_value( $britem, NULL, LANGUAGES_PKG_NAME );
+		byref_set_value( $britem, null, LANGUAGES_PKG_NAME );
 	}
 	global $gBitLanguage;
 	$gBitLanguage->setLanguage( $gBitSystem->getConfig( 'bitlanguage' ));
@@ -61,7 +61,7 @@ if( isset( $_REQUEST["prefs"] )) {
 }
 
 // Get list of available languages
-$languages = array();
+$languages = [];
 $languages = $gBitLanguage->listLanguages();
-$gBitSmarty->assignByRef( "languages", $languages );
+$gBitSmarty->assign( "languages", $languages );
 ?>

@@ -4,6 +4,9 @@
  * @package  liberty
  * @subpackage plugins_data
  */
+namespace Bitweaver\Liberty;
+use Bitweaver\KernelTools;
+
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2004, bitweaver.org
 // +----------------------------------------------------------------------+
@@ -25,32 +28,32 @@
  */
 define( 'PLUGIN_GUID_DATATRANSLATED', 'datatranslated' );
 global $gLibertySystem;
-$pluginParams = array (
+$pluginParams = [
 	'tag' => 'TRANSLATED',
-	'auto_activate' => FALSE,
-	'requires_pair' => FALSE,
+	'auto_activate' => false,
+	'requires_pair' => false,
 	'load_function' => 'data_translated',
 	'title' => 'Translated - (not yet functional)', // Remove this line when the plugin becomes operational
 //	'title' => 'Translated', // and Remove the comment from the start of this line, and the comments Help Function below
 	'help_page' => 'DataPluginTranslated',
-	'description' => tra("This plugin is used to create a link to a page that contains a translation. The link can be shown as an Icon for the country or as an abreviation for the language."),
+	'description' => KernelTools::tra("This plugin is used to create a link to a page that contains a translation. The link can be shown as an Icon for the country or as an abreviation for the language."),
 	'help_function' => 'data_translated_help',
 	'syntax' => "{TRANSLATED page= lang= flag= }",
 	'plugin_type' => DATA_PLUGIN
-);
+];
 $gLibertySystem->registerPlugin( PLUGIN_GUID_DATATRANSLATED, $pluginParams );
 $gLibertySystem->registerDataTag( $pluginParams['tag'], PLUGIN_GUID_DATATRANSLATED );
 
 // Help Function
 function data_translated_help() {
-	$back = tra("^__Parameter Syntax:__ ") . "~np~{TRANSLATED" . tra("(key=>value)}~/np~\n");
-	$back.= tra("||__::key::__ | __::value::__ | __::Comments::__\n");
-	$back.= "::page::" . tra(" | ::page name:: |  __Manditory__ Is a valid url for the page which contains the translation. The page name can be in the formats [url] or ((wikiname)) or ((inter:interwiki))\n^");
-	$back.= "::lang::" . tra(" | ::abreviation:: | __Manditory__ Is a 2 letter code that specifies the language to use. See the Abreviations given below.\n");
-	$back.= "::flag::" . tra(" | ::flag name:: | __Optional__ Is an image file that can be used as the link. See the Flag Names given below\n");
+	$back = KernelTools::tra("^__Parameter Syntax:__ ") . "~np~{TRANSLATED" . KernelTools::tra("(key=>value)}~/np~\n");
+	$back.= KernelTools::tra("||__::key::__ | __::value::__ | __::Comments::__\n");
+	$back.= "::page::" . KernelTools::tra(" | ::page name:: |  __Manditory__ Is a valid url for the page which contains the translation. The page name can be in the formats [url] or ((wikiname)) or ((inter:interwiki))\n^");
+	$back.= "::lang::" . KernelTools::tra(" | ::abreviation:: | __Manditory__ Is a 2 letter code that specifies the language to use. See the Abreviations given below.\n");
+	$back.= "::flag::" . KernelTools::tra(" | ::flag name:: | __Optional__ Is an image file that can be used as the link. See the Flag Names given below\n");
 //	$back.= "^__Flag Names:__ ~pp~American_Samoa / Angola / Antigua / Argentina / Armenia / Australia / Austria / Bahamas / Bahrain / Bangladesh / Barbados / Belgium / Bermuda / Bolivia / Brazil / Brunei / Canada / Cayman_Islands / Chile / China / Colombia / Cook_Islands / Costa_Rica / Croatia / Cuba / Cyprus / Czech_Republic / Denmark / Dominican_Republic / Ecuador / Egypt / El_Salvador / Estonia / Federated_States_of_Micronesia / Fiji / Finland / France / French_Polynesia / Germany / Greece / Guam / Guatemala / Haiti / Honduras / Hungary / Iceland / India / Indonesia / Iran / Iraq / Ireland / Israel / Italy / Jamaica / Japan / Jordan / Kazakstan / Kenya / Kiribati / Kuwait / Latvia / Lebanon / Lithuania / Malawi / Malaysia / Malta / Marshall_Islands / Mauritius / Mexico / Morocco / Mozambique / Nauru / Nepal / Netherlands / New_Caledonia / New_Zealand / Nicaragua / Nigeria / Niue / Norway / Pakistan / Panama / Papua_New_Guinea / Paraguay / Peru / Phillippines / Poland / Portugal / Puerto_Rico / Quatar / Romania / Russia / Samoa / Saudi_Arabia / Singapore / Slovakia / Slovenia / Solomon_Islands / Somalia / South_Africa / South_Korea / Spain / Sri_Lanka / St_Vincent_Grenadines / Surinam / Sweden / Switzerland / Taiwan / Thailand / Tonga / Trinidad_Tobago / Turkey / Tuvalu / Ukraine / United_Arab_Emirates / United_Kingdom / United_States / Uruguay / Vanuatu / Venezuela / Wales / Yugoslavia / Zambia / Zimbabwe~/pp~\n^";
 //	$back.= tra("^ __Language Abreviations:__ Chinese (Simplified)=") . "__cn__" . tra(" /  Chinese Traditional=") . "__tw__" . tra(" / Czech=") . "__cs__" . tra(" / Danish=") . "__da__" . tra(" / English=") . "__en__" . tra(" / French=") . "__fr__" . tra(" / German=") . "__de__" . tra(" / Hebrew=") . "__he__" . tra(" / Italian=") . "__it__" . tra(" / Japanese=") . "__ja__" . tra(" / Norwegian=") . "__no__" . tra(" / Polish=") . "__po__" . tra(" / Russian=") . "__ru__" . tra(" / Serbian=") . "__sr__" . tra(" / Slovak=") . "__sk__" . tra(" Spanish=") . "__es__" . tra(" Swedish=") . "__sv__.||^";
-	$back.= tra("^__Example:__ ") . "~np~{TRANSLATED(page=>Home Page,lang=>fr,flag=>France)}~/np~^";
+	$back.= KernelTools::tra("^__Example:__ ") . "~np~{TRANSLATED(page=>Home Page,lang=>fr,flag=>France)}~/np~^";
 	return $back;
 }
 
@@ -113,4 +116,3 @@ function wikiplugin_translated($data, $params) {
 	return $back;
 }
 */
-?>
