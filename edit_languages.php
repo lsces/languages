@@ -13,13 +13,13 @@
 /**
  * Initialization
  */
-require_once( '../kernel/includes/setup_inc.php' );
+require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_edit' );
 
 // Get available languages from DB
 $languages = $gBitLanguage->listLanguages();
-$gBitSmarty->assignByRef('languages', $languages);
+$gBitSmarty->assign('languages', $languages);
 
 if( !empty( $_REQUEST['all_trans'] ) ) {
 	$gBitSmarty->assign( 'allTrans', 1 );
@@ -36,10 +36,10 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 } elseif( !empty( $_REQUEST['translate'] ) ) {
 	$editLang = $_REQUEST['lang'];
 	$gBitSmarty->assign( 'lang', $editLang );
-	$gBitSmarty->assign( 'translate', TRUE );
+	$gBitSmarty->assign( 'translate', true );
 	if( !empty( $_REQUEST['hash'] ) ) {
 		$tranStrings = $gBitLanguage->getTranslationString( $_REQUEST['hash'], $editLang );
-		$gBitSmarty->assignByRef('tranStrings', $tranStrings );
+		$gBitSmarty->assign('tranStrings', $tranStrings );
 	} else {
 		// what strings do we want to display?
 		if( empty( $_REQUEST['char'] ) ) {
@@ -61,13 +61,13 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 				if( preg_match( $pattern, $tran['source'] ) ) {
 					$tranStrings[$key] = $tran;
 					if( strlen( $tran['source'] ) > 70 ) {
-						$tranStrings[$key]['textarea'] = TRUE;
+						$tranStrings[$key]['textarea'] = true;
 					}
 				}
 			}
 		}
 		$gBitSmarty->assign( 'char', empty( $_REQUEST['char'] ) ? '' : $_REQUEST['char'] );
-		$gBitSmarty->assignByRef( 'tranStrings', $tranStrings );
+		$gBitSmarty->assign( 'tranStrings', $tranStrings );
 	}
 } elseif( isset($_REQUEST["delete_language"] ) ) {
 	if( $gBitUser->hasPermission( 'p_languages_delete' ) ) {
@@ -76,7 +76,7 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 			unset( $languages[$_REQUEST['delete_lang_code']] );
 		} else {
 			$formHash['delete_lang_code'] = $_REQUEST['lang'];
-			$formHash['delete_language'] = TRUE;
+			$formHash['delete_language'] = true;
 			$msgHash = array(
 				'label' => tra('Delete Language'),
 				'confirm_item' => tra('Are you sure you want to remove this language?') . ' ' . $languages[$_REQUEST['lang']]['native_name'],
@@ -89,19 +89,19 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 	if( $gBitLanguage->storeLanguage( $_REQUEST ) ) {
 		$languages = $gBitLanguage->listLanguages();
 		$gBitSmarty->assign( 'saveSuccess', tra( 'The language has been saved.' ) );
-		$gBitSmarty->assignByRef( 'defaults', $_REQUEST );
+		$gBitSmarty->assign( 'defaults', $_REQUEST );
 	} else {
-		$gBitSmarty->assignByRef( 'saveErrors', $gBitLanguage->mErrors );
-		$gBitSmarty->assignByRef( 'defaults', $_REQUEST );
-		$gBitSmarty->assign( 'editDescription', TRUE );
+		$gBitSmarty->assign( 'saveErrors', $gBitLanguage->mErrors );
+		$gBitSmarty->assign( 'defaults', $_REQUEST );
+		$gBitSmarty->assign( 'editDescription', true );
 	}
 } elseif( isset($_REQUEST["new_language"] ) ) {
-	$gBitSmarty->assign( 'editDescription', TRUE );
+	$gBitSmarty->assign( 'editDescription', true );
 } elseif( isset($_REQUEST["edit_language"] ) ) {
 	if( !empty( $languages[$_REQUEST['lang']] ) ) {
-		$gBitSmarty->assignByRef( 'defaults', $languages[$_REQUEST['lang']] );
+		$gBitSmarty->assign( 'defaults', $languages[$_REQUEST['lang']] );
 	}
-	$gBitSmarty->assign( 'editDescription', TRUE );
+	$gBitSmarty->assign( 'editDescription', true );
 }
 
 $gBitSystem->display( 'bitpackage:languages/edit_languages.tpl', tra( 'Edit Languages' ) , array( 'display_mode' => 'edit' ));

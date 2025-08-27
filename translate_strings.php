@@ -13,13 +13,13 @@
 /**
  * Initialization
  */
-require_once( '../kernel/includes/setup_inc.php' );
+require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_edit' );
 
 // Get available languages from DB
 $languages = $gBitLanguage->listLanguages();
-$gBitSmarty->assignByRef('languages', $languages);
+$gBitSmarty->assign('languages', $languages);
 
 if( !empty( $_REQUEST['all_trans'] ) ) {
 	$gBitSmarty->assign( 'allTrans', 1 );
@@ -33,7 +33,7 @@ if( !empty( $_REQUEST['un_trans'] ) ) {
 if( isset( $_REQUEST['save_translations'] ) ) {
 	$editLang = $_REQUEST['lang'];
 	$gBitLanguage->loadLanguage( $editLang );
-	$storedStrings = NULL;
+	$storedStrings = null;
 	foreach( $_REQUEST['edit_trans'] as $sourceHash => $string ) {
 		if( $string != $gBitLanguage->mStrings[$editLang][$sourceHash]['trans'] ) {
 			// we need to remove the $_REQUEST slashes here to avoid stuff like: 
@@ -51,16 +51,16 @@ if( isset( $_REQUEST['save_translations'] ) ) {
 		}
 	}
 	$tranStrings = $gBitLanguage->getTranslationString( $sourceHash, $editLang );
-	$gBitSmarty->assignByRef('tranStrings', $tranStrings );
+	$gBitSmarty->assign('tranStrings', $tranStrings );
 	$gBitSmarty->assign( 'lang', $editLang );
-	$gBitSmarty->assign( 'translate', TRUE );
+	$gBitSmarty->assign( 'translate', true );
 	$gBitSmarty->assign( 'saveSuccess', tra( "The following items have been saved successfully" ).":" );
 	$gBitSmarty->assign( 'storedStrings', $storedStrings );
 }
 
 if( !empty( $_REQUEST['hash'] ) ) {
 	$tranStrings = $gBitLanguage->getTranslationString( $_REQUEST['hash'], $editLang );
-	$gBitSmarty->assignByRef('tranStrings', $tranStrings );
+	$gBitSmarty->assign('tranStrings', $tranStrings );
 } elseif( !empty( $_REQUEST['choose_lang'] ) ) {
 	$editLang = $_REQUEST['choose_lang'];
 	$gBitSmarty->assign( 'editLang', $editLang );
@@ -72,7 +72,7 @@ if( !empty( $_REQUEST['hash'] ) ) {
 	} elseif ( $_REQUEST['char'] == '+' ) {
 		$pattern = "/^[^a-zA-Z]/";
 	} elseif ( $_REQUEST['char'] == 'all' ) {
-		$pattern = NULL;
+		$pattern = null;
 	} else {
 		$pattern = "/^".$_REQUEST['char']."/i";
 	}
@@ -85,13 +85,13 @@ if( !empty( $_REQUEST['hash'] ) ) {
 			if( empty( $pattern ) || preg_match( $pattern, $tran['source'] ) ) {
 				$tranStrings[$key] = $tran;
 				if( strlen( $tran['source'] ) > 50 ) {
-					$tranStrings[$key]['textarea'] = TRUE;
+					$tranStrings[$key]['textarea'] = true;
 				}
 			}
 		}
 	}
 	$gBitSmarty->assign( 'char', empty( $_REQUEST['char'] ) ? '' : $_REQUEST['char'] );
-	$gBitSmarty->assignByRef( 'tranStrings', $tranStrings );
+	$gBitSmarty->assign( 'tranStrings', $tranStrings );
 }
 
 $gBitSystem->display( 'bitpackage:languages/translate_strings.tpl', tra( 'Edit Translations' ) , array( 'display_mode' => 'edit' ));

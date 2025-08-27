@@ -13,10 +13,10 @@
 /**
  * Initialization
  */
-$gLightweightScan = TRUE;
-require_once( '../kernel/includes/setup_inc.php' );
+$gLightweightScan = true;
+require_once '../kernel/includes/setup_inc.php';
 
-$translation = NULL;
+$translation = null;
 
 if( !empty( $_REQUEST['lang'] ) && !empty( $_REQUEST['source_hash'] ) ) {
 	if( $masterString = $gBitLanguage->getMasterString( $_REQUEST['source_hash'] ) ) {

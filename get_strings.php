@@ -17,13 +17,13 @@
 /**
  * Update the language.php files
  * call example: get_strings.php?lang=fr&close
- * @param lang=xx    : only translate lang 'xx' - if the parameter is not given all languages are translated
- * @param comments   : generate all comments (equal to close&module)
- * @param close      : look for similar strings that are allready translated and generate a commet if a 'match' is made
- * @param module     : generate comments that describes in which .php and/or .tpl\n module(s) a certain string was found (useful for checking translations in context)
- * @param patch      : looks for the file 'language.patch' in the same directory as the corresponding language.php and overrides any strings in language.php - good if a user does not agree with some translations or if only changes are sent to the maintaner
- * @param spelling   : generate a file spellcheck_me.txt in the applicable languages directory that contains all the words used in the translated text. This makes it simple to use a spellchecker on the resulting file
- * @param groupwrite : Sets the generated files permissions to allow the generated language.php also be group writable. This is good for translators if they do not have root access to tiki but are in the same group as the webserver. Please remember to have write access removed when translation is finished for security reasons. (Run script again whithout this parameter)
+ * @var string lang=xx    : only translate lang 'xx' - if the parameter is not given all languages are translated
+ * @var string comments   : generate all comments (equal to close&module)
+ * @var string close      : look for similar strings that are allready translated and generate a commet if a 'match' is made
+ * @var string module     : generate comments that describes in which .php and/or .tpl\n module(s) a certain string was found (useful for checking translations in context)
+ * @var string patch      : looks for the file 'language.patch' in the same directory as the corresponding language.php and overrides any strings in language.php - good if a user does not agree with some translations or if only changes are sent to the maintaner
+ * @var string spelling   : generate a file spellcheck_me.txt in the applicable languages directory that contains all the words used in the translated text. This makes it simple to use a spellchecker on the resulting file
+ * @var string groupwrite : Sets the generated files permissions to allow the generated language.php also be group writable. This is good for translators if they do not have root access to tiki but are in the same group as the webserver. Please remember to have write access removed when translation is finished for security reasons. (Run script again whithout this parameter)
  */
 
 
@@ -147,7 +147,7 @@ function writeTranslationPair ($fd, $key, $val) {
 
 ////////////////////////////////////////////////////////////////////////////
 
-require_once( '../kernel/includes/setup_inc.php' );
+require_once '../kernel/includes/setup_inc.php';
 
 if(!$gBitUser->isAdmin()) {
   die("You need to be admin to run this script");
@@ -166,7 +166,7 @@ $nosections = isset ($_REQUEST['nosections']);
 
 // Get the language(s)
 $languages = Array();
-print("Languages: ");
+print "Languages: ";
 if (isset ($_REQUEST["lang"])) {
   $lang = $_REQUEST["lang"];
   $languages[] = $lang;
@@ -182,7 +182,7 @@ else {
   }
   closedir ($handle);
 }    	
-print("<br />");  
+print "<br />";  
 
 
 $files = Array();
@@ -217,12 +217,12 @@ foreach ($languages as $sel) {
     if (!file_exists ($origPatch)) {
       die ("No patch file .../$origPatch exisits");
     }
-    require ($origPatch);
+    require $origPatch;
     $patchLang = $lang;
     unset ($lang);
   }
 
-  require("lang/$sel/language.php");
+  require "lang/$sel/language.php";
 
   if (isset ($lang[$oldEndMarker])) {
     unset ($lang[$oldEndMarker]);
@@ -243,7 +243,7 @@ foreach ($languages as $sel) {
 
   $fw = fopen( LANGUAGES_PKG_PATH."lang/$sel/new_language.php",'w');
   
-  print("&lt;");
+  print "&lt;";
   fwrite($fw,"<");
   writeFile_and_User ($fw, "?php");
   // The comment coding:utf-8 is for the benefit of emacs
@@ -344,11 +344,11 @@ foreach ($languages as $sel) {
       // Do not translate text in Smarty comments: {* Smarty comment *}
       $data = preg_replace ('/(?s)\{\*.*?\*\}/', '', $data); // Smarty comment 
 
-      // Strings of the type {tr}{$perms[user].type}{/tr} need (should)
+      // Strings of the type {$perms[user].type} need (should)
       // not be translated
       $data = preg_replace ('/(?s)\{tr\}\s*\{[$][^\}]*?\}\s*\{\/tr\}/','',$data);
 
-      // Only extract {tr} ... {/tr} in .tpl-files
+      // Only extract  ...  in .tpl-files
       preg_match_all ('/(?s)\{tr\}(.+?)\{\/tr\}/', $data, $uqwords);
     }
 
@@ -479,7 +479,7 @@ foreach ($languages as $sel) {
 	  $moduleText = " // ## MODULES " . $modulename[$key];
 	}
 
-	writeFile_and_User ($fw, "${closeText}${moduleText}");
+	writeFile_and_User ($fw, "{$closeText}{$moduleText}");
       }
       writeFile_and_User ($fw, "\n");
     }
@@ -521,7 +521,7 @@ foreach ($languages as $sel) {
     }
   }
   writeFile_and_User ($fw, '"'.$endMarker.'"=>"'.$endMarker.'");'."\n");
-  print ("?&gt;<br />\n");  
+  print "?&gt;<br />\n";  
   fwrite ($fw, '?>'."\n");  
   fclose ($fw);
 
@@ -548,4 +548,3 @@ foreach ($languages as $sel) {
     umask($old_umask); // Reset umask back to original value
   }
 }
-?>
