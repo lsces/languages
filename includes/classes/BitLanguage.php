@@ -13,11 +13,20 @@
 /**
  * @package languages
  */
+
+namespace Bitweaver\Languages;
+use Bitweaver\BitSingleton;
+use Bitweaver\KernelTools;
+
 class BitLanguage extends BitSingleton {
 	// list of available (non-disabled) languages
 	public $mLanguageList;
 
 	public $mLanguage;
+
+	public $mStrings;
+
+	public $mImportConflicts;
 
 	/**
 	 * initiate BitLanguage 
@@ -27,7 +36,7 @@ class BitLanguage extends BitSingleton {
 		$this->load();
 	}
 
-	protected function load() {
+	public function load() {
 		if( parent::load() ) {
 			$this->mLanguageList = $this->listLanguages();
 			$this->autoSetLanguage();
@@ -40,7 +49,7 @@ class BitLanguage extends BitSingleton {
 		if (isset($_SESSION['bitlanguage'])) {
 			// users not logged that change the preference
 			$this->setLanguage( $_SESSION['bitlanguage'] );
-		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $gBitSystem->isFeatureActive( 'i18n_browser_languages' )) {
+		} elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && !empty($gBitSystem) && $gBitSystem->isFeatureActive( 'i18n_browser_languages' )) {
 			// Get supported languages
 			if( $browserLangs = preg_split( '/,/', preg_replace('/;q=[0-9.]+/', '', $_SERVER['HTTP_ACCEPT_LANGUAGE']) ) ) {
 				foreach( $browserLangs as $bl ) {
@@ -62,7 +71,7 @@ class BitLanguage extends BitSingleton {
 		}
 	}
 
-	function isCacheableObject() {
+	public function isCacheableObject() {
 		return !empty( $this->mLanguageList );
 	}
 
@@ -80,11 +89,10 @@ class BitLanguage extends BitSingleton {
 	/**
 	 * getLanguage get acvtive language
 	 * 
-	 * @access public
-	 * @return active language
+	 * @return string active language
 	 */
-	function getLanguage() {
-		return( $this->mLanguage );
+	public function getLanguage() {
+		return $this->mLanguage;
 	}
 
 	/**
@@ -99,7 +107,7 @@ class BitLanguage extends BitSingleton {
 	}
 
 	function isLanguageRTL () {
-		return( !empty( $this->mLanguageList[$this->mLanguage]['right_to_left'] ) );
+		return !empty( $this->mLanguageList[$this->mLanguage]['right_to_left'] );
 	}
 
 	/**
@@ -107,23 +115,23 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param array $pParamHash parameters that will be stored
 	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
 	function verifyLanguage( &$pParamHash ) {
 		$langs = $this->listLanguages();
 		if( empty( $pParamHash['lang_code'] ) || strlen( $pParamHash['lang_code'] ) < 2 ) {
-			$this->mErrors['lang_code'] = tra( 'The language code must be at least 2 characters.' );
+			$this->mErrors['lang_code'] = KernelTools::tra( 'The language code must be at least 2 characters.' );
 		} elseif( !empty( $langs[$pParamHash['lang_code']] ) && empty( $pParamHash['update_lang_code'] ) ) {
-			$this->mErrors['lang_code'] = tra( 'This language code is already used by ' ).$langs[$pParamHash['lang_code']]['native_name'];
+			$this->mErrors['lang_code'] = KernelTools::tra( 'This language code is already used by ' ).$langs[$pParamHash['lang_code']]['native_name'];
 		}
 		if( empty( $pParamHash['native_name'] ) ) {
 			$this->mErrors['native_name'] = 'You must provide the native language name';
 		}
 		if( !isset( $pParamHash['english_name'] ) ) {
-			$pParamHash['english_name'] = NULL;
+			$pParamHash['english_name'] = null;
 		}
-		$pParamHash['is_disabled'] = !empty( $pParamHash['is_disabled'] ) ? 'y' : NULL;
-		return( count( $this->mErrors ) === 0 );
+		$pParamHash['is_disabled'] = !empty( $pParamHash['is_disabled'] ) ? 'y' : null;
+		return count( $this->mErrors ) === 0;
 	}
 
 	/**
@@ -131,7 +139,7 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param array $pParamHash parameters that will be stored
 	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
 	function storeLanguage( $pParamHash ) {
 		if( $this->verifyLanguage( $pParamHash ) ) {
@@ -143,7 +151,7 @@ class BitLanguage extends BitSingleton {
 				$result = $this->mDb->query( $query, array( $pParamHash['lang_code'], $pParamHash['english_name'], $pParamHash['native_name'], $pParamHash['is_disabled'], $pParamHash['update_lang_code'] ) );
 			}
 		}
-		return( count( $this->mErrors ) == 0 );
+		return count( $this->mErrors ) == 0;
 	}
 
 	/**
@@ -168,10 +176,9 @@ class BitLanguage extends BitSingleton {
 	 * expungeMasterString remove master string from database
 	 * 
 	 * @param string $pSourceHash MD5 hash of master string
-	 * @access public
-	 * @return TRUE on success, FALSE on failure
+	 * @return void
 	 */
-	function expungeMasterString( $pSourceHash ) {
+	public function expungeMasterString( $pSourceHash ) {
 		if( !empty( $pSourceHash ) ) {
 			$this->StartTrans();
 			$query = "DELETE FROM `".BIT_DB_PREFIX."i18n_strings` WHERE `source_hash`=?";
@@ -179,20 +186,18 @@ class BitLanguage extends BitSingleton {
 			$query = "DELETE FROM `".BIT_DB_PREFIX."i18n_masters` WHERE `source_hash`=?";
 			$result = $this->mDb->query( $query, array( $pSourceHash ) );
 			$this->CompleteTrans();
-			return TRUE;
 		}
 	}
 
 	/**
 	 * getImportedLanguages get a list of languages that have been imported
 	 * 
-	 * @access public
 	 * @return array of available languages
 	 */
-	function getImportedLanguages() {
-		$ret = array();
+	public function getImportedLanguages() {
+		$ret = [];
 		if( $rs = $this->mDb->query( 'SELECT DISTINCT(`lang_code`) AS `lang_code` FROM `'.BIT_DB_PREFIX.'i18n_strings`' ) ) {
-			$res = array();
+			$res = [];
 			while( !$rs->EOF ) {
 				$res[] = $rs->fields['lang_code'];
 				$rs->MoveNext();
@@ -210,14 +215,13 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param boolean $pListDisabled 
 	 * @param boolean $pListOnlyImportable 
-	 * @access public
 	 * @return array of languages
 	 */
-	function listLanguages( $pListDisabled=TRUE, $pListOnlyImportable=FALSE ) {
+	public function listLanguages( $pListDisabled=true, $pListOnlyImportable=false ) {
 		$whereSql = '';
-		$langs = array();
+		$langs = [];
 		if( !$pListDisabled ) {
-			$whereSql = " WHERE `is_disabled` IS NULL ";
+			$whereSql = " WHERE `is_disabled` IS null ";
 		}
 		$ret = $this->mDb->getAssoc( "SELECT il.`lang_code` AS `hash_key`, il.* FROM `".BIT_DB_PREFIX."i18n_languages` il $whereSql ORDER BY il.`lang_code`" );
 		if( !empty( $ret ) ) {
@@ -236,10 +240,9 @@ class BitLanguage extends BitSingleton {
 	/**
 	 * verifyMastersLoaded verify that master strings are loaded
 	 * 
-	 * @access public
 	 * @return void
 	 */
-	function verifyMastersLoaded() {
+	public function verifyMastersLoaded() {
 		// see if there is anything in the table
 		$query = "SELECT COUNT(`source_hash`) FROM `".BIT_DB_PREFIX."i18n_masters`";
 		$count = $this->mDb->getOne( $query );
@@ -251,27 +254,25 @@ class BitLanguage extends BitSingleton {
 	/**
 	 * masterStringExists check to see if a given master string already exists
 	 * 
-	 * @param array $pSourceHash MD5 hash of string to be checked
-	 * @access public
-	 * @return TRUE if found, FALSE otherwise
+	 * @param string $pSourceHash MD5 hash of string to be checked
+	 * @return bool true if found, false otherwise
 	 */
-	function masterStringExists( $pSourceHash ) {
-		return( !empty( $this->mStrings['master'][$pSourceHash] ) );
+	public function masterStringExists( $pSourceHash ) {
+		return !empty( $this->mStrings['master'][$pSourceHash] );
 	}
 
 	/**
 	 * searchMasterStrings find master string in database
 	 * 
 	 * @param string $pQuerySource string
-	 * @access public
-	 * @return TRUE on success, FALSE on failure
+	 * @return bool true on success, false on failure
 	 */
-	function searchMasterStrings( $pQuerySource ) {
+	public function searchMasterStrings( $pQuerySource ) {
 		$query = "
 			SELECT im.`source_hash` AS `hash_key`, `source`, `package`, im.`source_hash`
 			FROM `".BIT_DB_PREFIX."i18n_masters` im
 			WHERE UPPER( `source` ) LIKE ? ORDER BY im.`source`";
-		return( $this->mDb->getAssoc( $query, array( '%'.strtoupper( $pQuerySource ).'%' ) ) );
+		return $this->mDb->getAssoc( $query, array( '%'.strtoupper( $pQuerySource ).'%' ) );
 	}
 
 	/**
@@ -279,29 +280,28 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param string $pSourceHash MD5 hash to load
 	 * @param string $pFilter Limit strings loaded to unlimited (default), translated or untranslated
-	 * @access public
-	 * @return all master strings in $this->mStrings['master']
+	 * @return void all master strings in $this->mStrings['master']
 	 */
-	function loadMasterStrings( $pSourceHash = NULL, $pFilter = NULL, $pLangCode = NULL ) {
+	public function loadMasterStrings( $pSourceHash = null, $pFilter = null, $pLangCode = null ) {
 		$this->verifyMastersLoaded();
-		$bindVars = FALSE;
-		$whereSql = $joinSql = NULL;
+		$bindVars = null;
+		$whereSql = $joinSql = null;
 
 		if( $pSourceHash ) {
 			$whereSql = ' WHERE `source_hash`=? ';
-			$bindVars = array( $pSourceHash );
+			$bindVars = [ $pSourceHash ];
 		} else {
 			// some basic filter options
 			if( !empty( $pFilter )) {
 				$joinSql = "LEFT OUTER JOIN `".BIT_DB_PREFIX."i18n_strings` ist ON( im.`source_hash` = ist.`source_hash` )";
 				if( $pFilter == 'translated' ) {
-					$whereSql = "WHERE ist.`trans` IS NOT NULL";
+					$whereSql = "WHERE ist.`trans` IS NOT null";
 					if( !empty( $pLangCode )) {
 						$whereSql .= " AND ist.`lang_code` = ?";
 						$bindVars[] = $pLangCode;
 					}
 				} elseif( $pFilter == 'untranslated' ) {
-					$whereSql = "WHERE ist.`trans` IS NULL";
+					$whereSql = "WHERE ist.`trans` IS null";
 					// can't work out SQL to do language limits in this filter
 				}
 			}
@@ -318,16 +318,15 @@ class BitLanguage extends BitSingleton {
 	 * storeMasterString store master string
 	 * 
 	 * @param array $pParamHash data to be stored
-	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
-	function storeMasterString( $pParamHash ) {
+	public function storeMasterString( $pParamHash ) {
 		global $gBitSmarty;
 		if( !empty( $gBitSmarty->mCompileRsrc ) ) {
 			list($type, $location) = explode( ':', $gBitSmarty->mCompileRsrc );
 			list($package, $file) = explode( '/', $location );
 		} else {
-			$package = NULL;
+			$package = null;
 		}
 
 		$this->StartTrans();
@@ -359,7 +358,7 @@ class BitLanguage extends BitSingleton {
 			$this->mStrings['master'][$newSourceHash]['source_hash'] = $newSourceHash;
 		}
 		$this->CompleteTrans();
-		return( count( $this->mErrors ) == 0 );
+		return count( $this->mErrors ) == 0;
 	}
 
 
@@ -367,13 +366,12 @@ class BitLanguage extends BitSingleton {
 	 * importMasterStrings 
 	 * 
 	 * @param boolean $pOverwrite 
-	 * @access public
-	 * @return TRUE on success, FALSE on failure
+	 * @return bool true on success, false on failure
 	 */
-	function importMasterStrings( $pOverwrite=FALSE ) {
+	public function importMasterStrings( $pOverwrite=false ) {
 		global $lang;
 		$count = 0;
-		include_once ( LANGUAGES_PKG_PATH.'lang/masters.php' );
+		include_once LANGUAGES_PKG_PATH.'lang/masters.php';
 
 		foreach( $lang as $key=>$val ) {
 			$sourceHash = $this->getSourceHash( $key );
@@ -390,7 +388,7 @@ class BitLanguage extends BitSingleton {
 				$count++;
 			}
 		}
-		return( $count );
+		return $count;
 	}
 
 	/**
@@ -399,10 +397,9 @@ class BitLanguage extends BitSingleton {
 	 * @param string $pLangCode Language code
 	 * @param string $pString 
 	 * @param string $pSourceHash MD5 hash of master string
-	 * @access public
 	 * @return void
 	 */
-	function storeTranslationString( $pLangCode, $pString, $pSourceHash ) {
+	public function storeTranslationString( $pLangCode, $pString, $pSourceHash ) {
 		$query = "DELETE FROM `".BIT_DB_PREFIX."i18n_strings` WHERE `source_hash`=? AND `lang_code`=?";
 		$result = $this->mDb->query( $query, array( $pSourceHash, $pLangCode ) );
 
@@ -421,16 +418,15 @@ class BitLanguage extends BitSingleton {
 	 * getTranslatedStrings 
 	 * 
 	 * @param string $pSourceHash MD5 hash of master string
-	 * @access public
 	 * @return array of translated strings
 	 */
-	function getTranslatedStrings( $pSourceHash ) {
+	public function getTranslatedStrings( $pSourceHash ) {
 		$query = "
 			SELECT ist.`lang_code` AS `hash_key`, `trans`, ist.`source_hash`, ist.`lang_code`
 			FROM `".BIT_DB_PREFIX."i18n_strings` ist
 			WHERE ist.`source_hash`=?
 			ORDER BY ist.`lang_code`";
-		return( $this->mDb->getAssoc( $query, array( $pSourceHash ) ) );
+		return $this->mDb->getAssoc( $query, array( $pSourceHash ) );
 	}
 
 	/**
@@ -438,10 +434,9 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param string $pSourceHash MD5 hash of master string
 	 * @param string $pLangCode Language code
-	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
-	function getTranslationString( $pSourceHash, $pLangCode ) {
+	public function getTranslationString( $pSourceHash, $pLangCode ) {
 		$this->verifyTranslationLoaded( $pLangCode );
 		$query = "
 			SELECT im.`source_hash` AS `hash_key`, `source`, `trans`, im.`source_hash`
@@ -449,7 +444,7 @@ class BitLanguage extends BitSingleton {
 				LEFT OUTER JOIN `".BIT_DB_PREFIX."i18n_strings` ist ON( ist.`source_hash`=im.`source_hash` AND ist.`lang_code`=? )
 			WHERE im.`source_hash`=?
 			ORDER BY im.`source`";
-		return( $this->mDb->getAssoc( $query, array( $pLangCode, $pSourceHash ) ) );
+		return $this->mDb->getAssoc( $query, [ $pLangCode, $pSourceHash ] );
 	}
 
 	/**
@@ -457,34 +452,32 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param string $pLangCode Language code
 	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return string
 	 */
-	function getLanguageFile( $pLangCode ) {
-		return( LANGUAGES_PKG_PATH.'lang/'.$pLangCode.'/language.php' );
+	public function getLanguageFile( $pLangCode ) {
+		return LANGUAGES_PKG_PATH.'lang/'.$pLangCode.'/language.php';
 	}
 
 	/**
 	 * isImportFileAvailable 
 	 * 
 	 * @param string $pLangCode Language code
-	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
-	function isImportFileAvailable( $pLangCode ) {
-		return( file_exists( $this->getLanguageFile( $pLangCode ) ) );
+	public function isImportFileAvailable( $pLangCode ) {
+		return file_exists( $this->getLanguageFile( $pLangCode ) );
 	}
 
 	/**
 	 * importTranslationStrings 
 	 * 
 	 * @param string $pLangCode Language code
-	 * @param boolean $pOverwrite 
+	 * @param bool $pOverwrite 
 	 * @param string $pTable 
 	 * @param string $pFile path to file
-	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return int
 	 */
-	function importTranslationStrings( $pLangCode, $pOverwrite=FALSE, $pTable='i18n_strings`', $pFile=FALSE ) {
+	public function importTranslationStrings( $pLangCode, $pOverwrite=false, $pTable='i18n_strings`', $pFile=false ) {
 		$count = 0;
 
 		if( empty( $pFile ) ) {
@@ -513,7 +506,7 @@ class BitLanguage extends BitSingleton {
 				if( !$this->masterStringExists( $hashKey ) ) {
 					$this->storeMasterString( array( 'source_hash' => $hashKey, 'new_source' => $key ) );
 				}
-				$trans = $this->lookupTranslation( $key, $pLangCode, FALSE );
+				$trans = $this->lookupTranslation( $key, $pLangCode, false );
 				if( !is_null( $trans ) ) {
 					if( $pOverwrite ) {
 						$query = "UPDATE `".BIT_DB_PREFIX."i18n_strings` SET `trans`=?, `last_modified`=? WHERE `source_hash`=? AND `lang_code`=?";
@@ -534,17 +527,16 @@ class BitLanguage extends BitSingleton {
 			}
 		}
 
-		return( $count );
+		return $count;
 	}
 
 	/**
 	 * verifyTranslationLoaded 
 	 * 
 	 * @param string $pLangCode Language code
-	 * @access public
 	 * @return void
 	 */
-	function verifyTranslationLoaded( $pLangCode ) {
+	public function verifyTranslationLoaded( $pLangCode ) {
 		if ( $pLangCode ) {
 			// see if there is anything in the table
 			$query = "SELECT COUNT(`source_hash`) FROM `".BIT_DB_PREFIX."i18n_strings` ist WHERE ist.`lang_code`=?";
@@ -559,10 +551,9 @@ class BitLanguage extends BitSingleton {
 	 * loadLanguage 
 	 * 
 	 * @param string $pLangCode Language code
-	 * @access public
 	 * @return void
 	 */
-	function loadLanguage( $pLangCode ) {
+	public function loadLanguage( $pLangCode ) {
 		$this->verifyMastersLoaded();
 		$this->verifyTranslationLoaded( $pLangCode );
 		$query = "
@@ -578,57 +569,56 @@ class BitLanguage extends BitSingleton {
 	 * translate 
 	 * 
 	 * @param string $pString 
-	 * @access public
-	 * @return translation
+	 * @return string translation
 	 */
-	function translate( $pString ) {
+	public function translate( $pString ) {
 		global $gBitTranslationHash, $gBitSystem;
-		if( !empty( $pString ) ) {
-			$sourceHash = $this->getSourceHash( $pString );
-			$cacheFile = TEMP_PKG_PATH."lang/".$this->mLanguage."/".$sourceHash;
-			if( $this->mLanguage == 'en' ) {
-				$ret = $pString;
-			} elseif( !empty( $this->mStrings[$this->mLanguage][$sourceHash] ) ) {
-				$ret = $this->mStrings[$this->mLanguage][$sourceHash]['trans'];
-			} elseif( file_exists( $cacheFile ) && !$gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) ) {
+		$ret = $pString;
+		$sourceHash = $this->getSourceHash( $pString );
+		$cacheFile = TEMP_PKG_PATH."lang/".$this->mLanguage."/".$sourceHash;
+		if( $this->mLanguage == 'en' ) {
+			return $ret;
+		}
+		if( !empty( $this->mStrings[$this->mLanguage][$sourceHash] ) ) {
+			$ret = $this->mStrings[$this->mLanguage][$sourceHash]['trans'];
+		} elseif( file_exists( $cacheFile ) ) {
+			if ( !empty($gBitSystem) && !$gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) ) {
 				$ret = file_get_contents( $cacheFile );
-			} else {
-				if( empty( $this->mStrings[$this->mLanguage] ) ) {
-					$this->verifyTranslationLoaded( $this->mLanguage );
-				}
-				$tran = $this->lookupTranslation( $pString, $this->mLanguage );
-				if( empty( $tran ) ) {
-					// lookup failed. let's snag the first part of the langCode if it is a dialect (e.g. pt-br )
-					$dialect = strpos( $this->mLanguage, '-' );
-					if( $dialect ) {
-						$tran = $this->lookupTranslation( $pString, substr( $this->mLanguage, 0, $dialect ) );
-					}
-					if( empty( $tran ) ) {
-						$tran = $pString;
-					}
-				}
-				// write out the cache - translated or not so we don't keep hitting the database
-				mkdir_p( dirname( $cacheFile ) );
-				$fp = fopen( $cacheFile, 'w' );
-				fwrite( $fp, $tran );
-				fclose( $fp );
-				$this->mStrings[$this->mLanguage][$sourceHash]['trans'] = $tran;
-				$ret = $tran;
-			}
-
-			// interactive translation process
-			if( $gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) ) {
-				if( empty( $gBitTranslationHash ) ) {
-					$gBitTranslationHash = array();
-				}
-				if( !$index = array_search( $sourceHash, $gBitTranslationHash ) ) {
-					$gBitTranslationHash[] = $sourceHash;
-					$index = count( $gBitTranslationHash ) - 1;
-				}
-				$ret .= '_'.$index;
 			}
 		} else {
-			$ret = $pString;
+			if( empty( $this->mStrings[$this->mLanguage] ) ) {
+				$this->verifyTranslationLoaded( $this->mLanguage );
+			}
+			$tran = $this->lookupTranslation( $pString, $this->mLanguage );
+			if( empty( $tran ) ) {
+				// lookup failed. let's snag the first part of the langCode if it is a dialect (e.g. pt-br )
+				$dialect = strpos( $this->mLanguage ?? '', '-' );
+				if( $dialect ) {
+					$tran = $this->lookupTranslation( $pString, substr( $this->mLanguage, 0, $dialect ) );
+				}
+				if( empty( $tran ) ) {
+					$tran = $pString;
+				}
+			}
+			// write out the cache - translated or not so we don't keep hitting the database
+			KernelTools::mkdir_p( dirname( $cacheFile ) );
+			$fp = fopen( $cacheFile, 'w' );
+			fwrite( $fp, $tran );
+			fclose( $fp );
+			$this->mStrings[$this->mLanguage][$sourceHash]['trans'] = $tran;
+			$ret = $tran;
+		}
+
+		// interactive translation process
+		if( !empty($gBitSystem) && $gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) ) {
+			if( empty( $gBitTranslationHash ) ) {
+				$gBitTranslationHash = [];
+			}
+			if( !$index = array_search( $sourceHash, $gBitTranslationHash ) ) {
+				$gBitTranslationHash[] = $sourceHash;
+				$index = count( $gBitTranslationHash ) - 1;
+			}
+			$ret .= '_'.$index;
 		}
 
 		return $ret;
@@ -640,10 +630,9 @@ class BitLanguage extends BitSingleton {
 	 * @param string $pString 
 	 * @param string $pLangCode Language code
 	 * @param boolean $pOverrideUsage 
-	 * @access public
-	 * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
+	 * @return bool true on success, false on failure - mErrors will contain reason for failure
 	 */
-	function lookupTranslation( $pString, $pLangCode, $pOverrideUsage = TRUE ) {
+	public function lookupTranslation( $pString, $pLangCode, $pOverrideUsage = true ) {
 		global $gBitSystem;
 		$sourceHash = $this->getSourceHash( $pString );
 		if ( $pLangCode ) {
@@ -667,7 +656,7 @@ class BitLanguage extends BitSingleton {
 				}
 			}
 		}
-		return (isset( $ret['trans'] ) ? $ret['trans'] : NULL );
+		return isset( $ret['trans'] ) ? $ret['trans'] : null;
 	}
 
 	/**
@@ -675,32 +664,30 @@ class BitLanguage extends BitSingleton {
 	 * 
 	 * @param string $pSourceHash
 	 * @access public
-	 * @return master string with given source hash
+	 * @return string master string with given source hash
 	 */
-	function getMasterString( $pSourceHash ) {
-		return( $this->mDb->getOne( "SELECT `source` FROM `" . BIT_DB_PREFIX . "i18n_masters` WHERE `source_hash` = ? ", array( $pSourceHash ) ) );
+	public function getMasterString( $pSourceHash ) {
+		return $this->mDb->getOne( "SELECT `source` FROM `" . BIT_DB_PREFIX . "i18n_masters` WHERE `source_hash` = ? ", array( $pSourceHash ) );
 	}
 
 	/**
 	 * getSourceHash 
 	 * 
 	 * @param string $pString 
-	 * @access public
-	 * @return MD5 hash of string
+	 * @return string MD5 hash of string
 	 */
-	function getSourceHash( $pString ) {
-		return( md5( strtolower( trim( $pString ))));
+	public function getSourceHash( $pString ) {
+		return md5( strtolower( trim( $pString ?? '' )));
 	}
 
 	/**
 	 * clearCache 
 	 * 
-	 * @access public
 	 * @return void
 	 */
-	function clearCache() {
-		unlink_r( TEMP_PKG_PATH."lang/" );
-		unlink_r( TEMP_PKG_PATH."templates_c/" );
+	public function clearCache() {
+		KernelTools::unlink_r( TEMP_PKG_PATH."lang/" );
+		KernelTools::unlink_r( TEMP_PKG_PATH."templates_c/" );
 	}
 }
 
