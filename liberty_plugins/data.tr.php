@@ -39,7 +39,7 @@ function data_tr_help() {
 }
 
 function data_tr( $pData, $pParams, $pCommonObject ) {
-	$transString = tra( $pData );
+	$transString = KernelTools::tra( $pData );
 	$parseHash = $pCommonObject->mInfo;
 	$parseHash['no_cache'] = true;
 	$parseHash['data'] = $transString;
