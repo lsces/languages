@@ -26,8 +26,8 @@ function updateTranslation( pResponse ) {
 function autoTranslateEmpty() {
 	var elem = document.getElementById('translateform').elements;
 	for(var i = 0; i < elem.length; i++) {
-		if( elem[i].type == 'text' || elem[i].type == 'textarea' ) {
-			if( !elem[i].value && elem[i].id ) {
+		if( elem[i].type == 'text' or elem[i].type == 'textarea' ) {
+			if( !elem[i].value and elem[i].id ) {
 				autoHashArray.push( elem[i].id );
 			}
 		}

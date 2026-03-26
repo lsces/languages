@@ -30,7 +30,7 @@
 			{if $editLang}
 				{legend legend=$languages.$lang.full_name}
 					{foreach from=$tranStrings key=sourceHash item=tran}
-						{if $allTrans || (!$gBitSystem->isFeatureActive( 'i18n_track_translation_usage' ) || $tran.version)}
+						{if $allTrans or (!$gBitSystem->isFeatureActive( 'i18n_track_translation_usage' ) or $tran.version)}
 							<div class="{if !$tran.version and !allTrans} warning{/if}">
 								{forminput}
 									<a href="{$smarty.const.LANGUAGES_PKG_URL}master_strings.php?source_hash={$sourceHash}">{$tran.source|escape|nl2br}</a><br/>
