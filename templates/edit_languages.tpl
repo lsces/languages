@@ -35,7 +35,7 @@
 							</div>
 							<div class="form-group">
 								{forminput label="checkbox"}
-									<input type="checkbox" name="is_disabled" id="is_disabled" {if $isDisabled or $defaults.is_disabled}checked="checked"{/if} value="y" />Disabled
+									<input type="checkbox" name="is_disabled" id="is_disabled" {if $isDisabled || $defaults.is_disabled}checked="checked"{/if} value="y" />Disabled
 									{formhelp note="Disabling a language will remove it from available language menus."}
 								{/forminput}
 							</div>

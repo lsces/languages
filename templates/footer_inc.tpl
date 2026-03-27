@@ -1,4 +1,4 @@
-{if $gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) and $gBitUser->hasPermission( 'p_languages_edit' )}
+{if $gBitSystem->isFeatureActive( 'i18n_interactive_translation' ) && $gBitUser->hasPermission( 'p_languages_edit' )}
 	<div class="translation box">
 		<h3>{tr}Translation Links{/tr}</h3>
 		{foreach from=$gBitTranslationHash item=hash key=key}

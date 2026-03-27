@@ -1,6 +1,6 @@
 {* $Header$ *}
 
-{if $gBitSystem->isFeatureActive( 'babelfish' ) and $gBitSystem->isFeatureActive( 'babelfish_logo' )}
+{if $gBitSystem->isFeatureActive( 'babelfish' ) && $gBitSystem->isFeatureActive( 'babelfish_logo' )}
 
 <div class="display babelfish">
 <table>
@@ -23,7 +23,7 @@
 </table>
 </div>
 
-{elseif $gBitSystem->isFeatureActive( 'babelfish' ) and !$gBitSystem->isFeatureActive( 'babelfish_logo' )}
+{elseif $gBitSystem->isFeatureActive( 'babelfish' ) && !$gBitSystem->isFeatureActive( 'babelfish_logo' )}
 
 <div class="babelfish">
 <table>
@@ -35,7 +35,7 @@
 </table>
 </div>
 
-{elseif !$gBitSystem->isFeatureActive( 'babelfish' ) and $gBitSystem->isFeatureActive( 'babelfish_logo' )}
+{elseif !$gBitSystem->isFeatureActive( 'babelfish' ) && $gBitSystem->isFeatureActive( 'babelfish_logo' )}
 
 <div class="babelfish">
   {$babelfish_logo}
