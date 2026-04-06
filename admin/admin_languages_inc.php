@@ -21,7 +21,7 @@ $formLanguageToggles = array(
 	),
 	'i18n_interactive_bittranslation' => array(
 		'label' => 'Interactive bitTranslations',
-		'note' => 'If you have a <a href="http://doc.bitweaver.org/forums/viewtopic.php?t=948">translators account</a> on bitweaver.org, the translation links will redirect you there that you can modify the tranlations there. Due to the different setup on bitweaver.org, there might be strings that are not available for translation on that server.',
+		'note' => 'If you have a <a href="https://bitweaver.org/forums/viewtopic.php?t=948">translators account</a> on bitweaver.org, the translation links will redirect you there that you can modify the tranlations there. Due to the different setup on bitweaver.org, there might be strings that are not available for translation on that server.',
 	),
 	'i18n_record_untranslated' => array(
 		'label' => 'Record untranslated',

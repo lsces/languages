@@ -434,7 +434,7 @@ foreach ($languages as $sel) {
     writeFile_and_User ($fw, "// ### Please remove manually!\n");
     writeFile_and_User ($fw, "// ### N.B. Legitimate strings may be marked");
     writeFile_and_User ($fw, "// ### as unused!\n");
-    writeFile_and_User ($fw, "// ### Please see http://doc.bitweaver.org/wiki/index.php?page=UnusedWords for furhter info.\n");
+    writeFile_and_User ($fw, "// ### Please see https://bitweaver.org/wiki/index.php?page=UnusedWords for furhter info.\n");
     foreach ($unused as $key => $val) {
       writeTranslationPair ($fw, $key, $val);
       addToWordlist ($wordlist, $val);
