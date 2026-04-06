@@ -599,25 +599,25 @@ $lang=Array(
 'Flash' => 'Flash',
 'folder' => 'folder',
 'Footnotes' => 'Note de subsol',
-'for additional information about this plugin, see <a class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'pentru informaţii suplimentare despre acest plugin, vezi <a class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.',
-'for additional information about this plugin, see <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'pentru informaţii suplimentare despre acest plugin, vezi <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
+'for additional information about this plugin, see <a class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'pentru informaţii suplimentare despre acest plugin, vezi <a class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.',
+'for additional information about this plugin, see <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'pentru informaţii suplimentare despre acest plugin, vezi <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
 ',
 'For additional information about this plugin - see bitweaver.Org or click <a class=\'wiki\' target=_blank href=\'{$p.tpopg}\'><strong>Here</strong></a> to visit.' => 'Pentru informaţii suplimentare despre acest plugin - vezi bitweaver.org sau <a class=\'wiki\' target=_blank href=\'{$p.tpopg}\'><strong>aici</strong></a>.
 ',
-'for additional information about this plugin, see {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.' => 'pentru informaţii suplimentare despre acest plugin, vezi {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.
+'for additional information about this plugin, see {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.' => 'pentru informaţii suplimentare despre acest plugin, vezi {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.
 ',
 'Format' => 'Format',
 'Format GUID' => 'GUID format',
-'For more information, please visit <a class="external" href="http://www.bitweaver.org">bitweaver.org</a>' => 'Pentru mai multe informaţii, vizitează <a class="external" href="http://www.bitweaver.org">bitweaver.org</a>
+'For more information, please visit <a class="external" href="https://www.bitweaver.org">bitweaver.org</a>' => 'Pentru mai multe informaţii, vizitează <a class="external" href="https://www.bitweaver.org">bitweaver.org</a>
 ',
-'For more information, please visit <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org">bitweaver.org</a>' => 'Pentru mai multe informaţii, vizitează <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org">bitweaver.org</a>
+'For more information, please visit <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org">bitweaver.org</a>' => 'Pentru mai multe informaţii, vizitează <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org">bitweaver.org</a>
 ',
-'For more information, please visit {jspopup href="http://www.bitweaver.org/" title="www.bitweaver.org" class=external}' => 'Pentru mai multe informaţii, vizitează {jspopup href="http://www.bitweaver.org/" title="www.bitweaver.org" class=external}
+'For more information, please visit {jspopup href="https://www.bitweaver.org/" title="www.bitweaver.org" class=external}' => 'Pentru mai multe informaţii, vizitează {jspopup href="https://www.bitweaver.org/" title="www.bitweaver.org" class=external}
 ',
 '|| for rows' => '|| pentru rânduri',
 'Forum' => 'Forum',
 'forums' => 'forumuri',
-'For Web-Safe Color Names see <a class=\'wiki\' target=_blank href=\'http://www.bitweaver.org/wiki/Browser+ColorNames\'>bitweaver</a> or for HTML Color numbers see <a class=\'wiki\' target=_blank href=\'http://www.pagetutor.com/pagetutor/makapage/picker/\'>The Color Picker II</a>' => 'Pentru nume de culori web-safe, vezi <a class=\'wiki\' target=_blank href=\'http://www.bitweaver.org/wiki/Browser+ColorNames\'>bitweaver</a> sau pentru numere de culori HTML vezi <a class=\'wiki\' target=_blank href=\'http://www.pagetutor.com/pagetutor/makapage/picker/\'>The Color Picker II</a>
+'For Web-Safe Color Names see <a class=\'wiki\' target=_blank href=\'https://www.bitweaver.org/wiki/Browser+ColorNames\'>bitweaver</a> or for HTML Color numbers see <a class=\'wiki\' target=_blank href=\'http://www.pagetutor.com/pagetutor/makapage/picker/\'>The Color Picker II</a>' => 'Pentru nume de culori web-safe, vezi <a class=\'wiki\' target=_blank href=\'https://www.bitweaver.org/wiki/Browser+ColorNames\'>bitweaver</a> sau pentru numere de culori HTML vezi <a class=\'wiki\' target=_blank href=\'http://www.pagetutor.com/pagetutor/makapage/picker/\'>The Color Picker II</a>
 ',
 'France' => 'Franţa',
 'FreeMind (Mind Map)' => 'FreeMind (Mind Map)',
@@ -1512,11 +1512,11 @@ $lang=Array(
 'Top Pages' => 'Top pagini',
 'Top visited blogs' => 'Top bloguri vizitate',
 'Total number of entries' => 'Număr total de intrări',
-'To view syntax help, please visit <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
+'To view syntax help, please visit <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează <a onkeypress="popUpWin(this.href,\'full\',800,800);" onclick="popUpWin(this.href,\'full\',800,800);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
 ',
-'To view syntax help, please visit <a onkeypress="popUpWin(this.href,\'standard\',600,400);" onclick="popUpWin(this.href,\'standard\',600,400);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează <a onkeypress="popUpWin(this.href,\'standard\',600,400);" onclick="popUpWin(this.href,\'standard\',600,400);return false;" class="external" href="http://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
+'To view syntax help, please visit <a onkeypress="popUpWin(this.href,\'standard\',600,400);" onclick="popUpWin(this.href,\'standard\',600,400);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează <a onkeypress="popUpWin(this.href,\'standard\',600,400);" onclick="popUpWin(this.href,\'standard\',600,400);return false;" class="external" href="https://www.bitweaver.org/wiki/index.php?page={$p.help_page}">{$p.help_page}</a>.
 ',
-'To view syntax help, please visit {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" title=$p.help_page class=external}.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" title=$p.help_page class=external}.
+'To view syntax help, please visit {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" title=$p.help_page class=external}.' => 'Pentru a vedea ajutorul pentru sintaxă, vizitează {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" title=$p.help_page class=external}.
 ',
 'Traditional Chinese' => 'Chineză tradiţională',
 'translate' => 'tradu',
@@ -1727,4 +1727,3 @@ $lang=Array(
 'Zambia' => 'Zambia',
 'Zimbabwe' => 'Zimbabwe',
 );
-?>

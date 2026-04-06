@@ -1723,7 +1723,7 @@ Set optional paramater -+ln+- to 1 if you need line numbering feature.' => 'По
 'Font' => 'Шрифт',
 'Footnotes' => 'Примечания',
 'for' => 'для',
-'for additional information about this plugin, see {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.' => 'для дополнительной информации об этом плагине смотри {jspopup href="http://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.',
+'for additional information about this plugin, see {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.' => 'для дополнительной информации об этом плагине смотри {jspopup href="https://www.bitweaver.org/wiki/index.php?page=`$p.help_page`" type=fullscreen title=$p.help_page class=external}.',
 'for bullet lists' => 'для маркированых списков',
 'Force to use characters <strong>and</strong> numbers in passwords' => 'Обязать использовать буквы <strong>и</strong> цифры в паролях',
 'Force to use chars and nums in passwords' => 'Обязать использовать буквы с цифрами в паролях',
@@ -1734,7 +1734,7 @@ Set optional paramater -+ln+- to 1 if you need line numbering feature.' => 'По
 'Format' => 'Формат',
 'Format GUID' => 'Формат интерфейса',
 'Format Plugin' => 'Плагин форматирования',
-'For more information, please visit {jspopup href="http://www.bitweaver.org" title="www.bitweaver.org" class=external}' => 'Для дополнительной информации посетите {jspopup href="http://www.bitweaver.org/" title="www.bitweaver.org" class=external}',
+'For more information, please visit {jspopup href="https://www.bitweaver.org" title="www.bitweaver.org" class=external}' => 'Для дополнительной информации посетите {jspopup href="https://www.bitweaver.org/" title="www.bitweaver.org" class=external}',
 'for numbered lists' => 'для нумерованных списков',
 '|| for rows' => '|| для строк',
 '
@@ -4706,4 +4706,3 @@ or use the image URL to include images using the WYSIWYG editor. ' => 'Если 
 'zone' => 'зона',
 'создать Wiki Page' => 'создать вики-страницу',
 );
-?>
