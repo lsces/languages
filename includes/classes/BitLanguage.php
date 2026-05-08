@@ -37,7 +37,7 @@ class BitLanguage extends BitSingleton {
 	}
 
 	public function load() {
-		if( parent::load() && $this->mDb->tableExists( 'i18n_languages' ) ) {
+		if( parent::load() && $this->mDb->mDb && $this->mDb->tableExists( 'i18n_languages' ) ) {
 			$this->mLanguageList = $this->listLanguages();
 			$this->autoSetLanguage();
 		}
