@@ -1,7 +1,7 @@
 <?php
 // This language is the Finnish translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 '1 -Lowest-' => '1 -Alin- ',
 '2 -Low-' => '2 -Alhainen- ',
 '3 -Normal-' => '3 -Normaali- ',
@@ -3317,4 +3317,4 @@ $lang=Array(
 'Zimbabwe' => 'Simbabwe ',
 'zip' => 'zip ',
 'zone' => 'Alue',
-);
+];

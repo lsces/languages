@@ -1,7 +1,7 @@
 <?php
 // This language is the  translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 'All Fields must be non empty' => 'E tau o fakafonu a vaega katoa',
 'Any wiki page is changed' => 'Sose wiki page e mafuli',
 'Assign permissions' => 'Fakatoka fakataliaga',
@@ -201,5 +201,5 @@ towards the following URL here on this site:' => 'Ke fakatonu tau device\'s brow
 'You must supply all the information, including title and year.' => 'E tau o tuku mai ne koe a fakamatalaga katoa fakatasi mote ulutala mote tausaga.',
 'Your admin password has been changed' => 'Tau password faka Admin ko oti ne fakamafuli',
 'Your email could not be validated; make sure you email is correct and click register below.' => 'E se talia tau e-mail; onoono o toe fakataonu ko ko toko ei register mai lalo.',
-);
+];
 ?>

@@ -1,7 +1,7 @@
 <?php
 // This language is the Czech translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 '1 -Lowest-' => '1 - nejnižší',
 '2 -Low-' => '2 - nízká',
 '3 -Normal-' => '3 - normální',
@@ -4105,5 +4105,5 @@ Po vybrání souboru se prosím vraťte na záložku "Tělo článku" a zvolte "
 'Zoom out x2' => 'Zmenšit x2',
 'Zoom out x3' => 'Zmenšit x3',
 'Zoom out x4' => 'Zmenšit x4',
-);
+];
 ?>

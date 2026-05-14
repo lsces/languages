@@ -1,7 +1,7 @@
 <?php
 // This language is the German translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 '-1d' => '-1Tag',
 '+1d' => '+1Tag',
 '-1m' => '-1Monat',
@@ -5743,4 +5743,4 @@ der Kartendatei:',
 'Zimbabwe' => 'Simbabwe',
 'zip' => 'PLZ',
 'zone' => 'Bereich',
-);
+];

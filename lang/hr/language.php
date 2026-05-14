@@ -1,7 +1,7 @@
 <?php
 // This language is the Croatian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '+1d' => '+1d',
 '+1m' => '+1m',
 '+7d' => '+7d',
@@ -2612,5 +2612,5 @@ $lang=Array(
 'You will receive an email with information to login for the first time into this site' => 'Primit ćete e-mail sa informacijama za prijavu po prvi put na ovaj site',
 'You will remove' => 'Obrisat ćete',
 'zone' => 'Zone',
-);
+];
 ?>

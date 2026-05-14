@@ -29,7 +29,6 @@ if( !empty( $_REQUEST['un_trans'] ) ) {
 	$gBitSmarty->assign( 'unTrans', 1 );
 }
 
-
 if( !empty( $_REQUEST['clear_cache'] ) ) {
 	$gBitLanguage->clearCache();
 	$gBitSmarty->assign( 'saveSuccess', tra( 'System template and language cache have been cleared.' ) );
@@ -77,11 +76,11 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 		} else {
 			$formHash['delete_lang_code'] = $_REQUEST['lang'];
 			$formHash['delete_language'] = true;
-			$msgHash = array(
+			$msgHash = [
 				'label' => tra('Delete Language'),
 				'confirm_item' => tra('Are you sure you want to remove this language?') . ' ' . $languages[$_REQUEST['lang']]['native_name'],
 				'warning' => tra('This will permanently remove the languages and all translations.'),
-			);
+			];
 			$gBitSystem->confirmDialog( $formHash,$msgHash );
 		}
 	}
@@ -104,6 +103,6 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 	$gBitSmarty->assign( 'editDescription', true );
 }
 
-$gBitSystem->display( 'bitpackage:languages/edit_languages.tpl', tra( 'Edit Languages' ) , array( 'display_mode' => 'edit' ));
+$gBitSystem->display( 'bitpackage:languages/edit_languages.tpl', tra( 'Edit Languages' ) , [ 'display_mode' => 'edit' ]);
 
 ?>

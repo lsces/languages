@@ -1,7 +1,7 @@
 <?php
 // This language is the Greek translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 'aborted' => 'ακυρώθηκε',
 'action' => 'ενέργεια',
 'Actions' => 'Ενέργειες',
@@ -462,5 +462,5 @@ $lang=Array(
 'You have' => 'Έχεις',
 'Your personal Wiki Page' => 'Η προσωπική σου σελίδα Wiki',
 'zone' => 'ζώνη',
-);
+];
 ?>

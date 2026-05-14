@@ -36,10 +36,9 @@
 // Usefull mode when preparing a translation for distribution.
 
 // http://www.neonchart.com/get_strings.php?nohelp&nosections
-// Prepare all languages for release 
+// Prepare all languages for release
 
-
-$lang=Array(
+$lang=[
 // ### Start of unused words
 // ### Please remove manually!
 // ### N.B. Legitimate strings may be marked// ### as unused!
@@ -4095,5 +4094,5 @@ $lang=Array(
 "Traditional Chinese" => "Xinés traditional",
 "Ukrainian" => "Ukranià",
 "Chinese" => "Xinès",
-"###end###"=>"###end###");
+"###end###"=>"###end###", ];
 ?>

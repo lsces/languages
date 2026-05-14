@@ -39,8 +39,8 @@ if( !empty( $_REQUEST['lang'] ) && !empty( $_REQUEST['source_hash'] ) ) {
 				$preppedTranslation = preg_replace( '/<smarty /', '{', $translation );
 				// needs to be a full tag so we can cleanly de-tagify after translation
 				$preppedTranslation = preg_replace( '/><\/smarty>/', '}', $preppedTranslation );
-				
-				print json_encode( array( 'lang_code' => $_REQUEST['lang'], 'source_hash' => $_REQUEST['source_hash'], 'translation' => $preppedTranslation ) );
+
+				print json_encode( [ 'lang_code' => $_REQUEST['lang'], 'source_hash' => $_REQUEST['source_hash'], 'translation' => $preppedTranslation ] );
 			}
 		}
 	}

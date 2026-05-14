@@ -1,7 +1,7 @@
 <?php
 // This language is the Korean translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '1일전',
 '+1d' => '1일후',
 '-1m' => '한달전',
@@ -826,5 +826,5 @@ $lang=Array(
 'You have to create a gallery first!' => '파일을 업로드할 수 있는 자료실이 없습니다!',
 'Your current avatar' => '현재 아바타',
 'Your personal Wiki Page' => '개인 위키 페이지',
-);
+];
 ?>

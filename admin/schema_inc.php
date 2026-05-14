@@ -1,6 +1,6 @@
 <?php
 
-$tables = [ 
+$tables = [
 
 'i18n_languages' => "
 	lang_code C(32) PRIMARY,
@@ -60,18 +60,18 @@ $gBitInstaller->registerSchemaIndexes( LANGUAGES_PKG_NAME, $indices );
 //);
 //$gBitInstaller->registerSchemaSequences( LIBERTY_PKG_NAME, $sequences );
 
-$gBitInstaller->registerPackageInfo( LANGUAGES_PKG_NAME, [ 
+$gBitInstaller->registerPackageInfo( LANGUAGES_PKG_NAME, [
 	'description' => "This package allows you to translate your site into a different language.",
 	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>',
 ] );
 
 // ### Default Preferences
-$gBitInstaller->registerPreferences( LANGUAGES_PKG_NAME, [ 
+$gBitInstaller->registerPreferences( LANGUAGES_PKG_NAME, [
 	[  LANGUAGES_PKG_NAME, 'i18n_record_untranslated','y' ],
 ] );
 
 // ### Default UserPermissions
-$gBitInstaller->registerUserPermissions( LANGUAGES_PKG_NAME, [ 
+$gBitInstaller->registerUserPermissions( LANGUAGES_PKG_NAME, [
 	[ 'p_languages_create', 'Can create new languages', 'admin', LANGUAGES_PKG_NAME],
 	[ 'p_languages_edit', 'Can edit translations', 'editors', LANGUAGES_PKG_NAME],
 	[ 'p_languages_delete', 'Can delete languages', 'admin', LANGUAGES_PKG_NAME],
@@ -79,7 +79,7 @@ $gBitInstaller->registerUserPermissions( LANGUAGES_PKG_NAME, [
 	[ 'p_languages_import', 'Can import and export language files', 'editors', LANGUAGES_PKG_NAME],
 ] );
 
-$gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, [ 
+$gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, [
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`,`right_to_left`) VALUES ('ar', 'ﺎﻠﻋﺮﺒﻳﺓ', 'Arabic','y' )",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('ca', 'Català', 'Catalan')",
 	"INSERT INTO `".BIT_DB_PREFIX."i18n_languages` (`lang_code`,`native_name`,`english_name`) VALUES ('cs', 'Český', 'Czech')",
@@ -122,7 +122,7 @@ $gBitInstaller->registerSchemaDefault( LANGUAGES_PKG_NAME, [
 ] );
 
 // Package requirements
-$gBitInstaller->registerRequirements( LANGUAGES_PKG_NAME, [ 
+$gBitInstaller->registerRequirements( LANGUAGES_PKG_NAME, [
 	'liberty'   => [ 'min' => '5.0.0' ],
 	'users'     => [ 'min' => '5.0.0' ],
 	'kernel'    => [ 'min' => '5.0.0' ],

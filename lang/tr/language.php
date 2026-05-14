@@ -1,7 +1,7 @@
 <?php
 // This language is the Turkish translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 'Add' => 'Ekle',
 'Add a new group' => 'Yeni grup ekle',
 'Add a new user' => 'Yeni kullanıcı ekle',
@@ -663,5 +663,5 @@ $lang=Array(
 'Your registration code' => 'Üyelik kodunuz',
 'Your username can only contain numbers, characters, and underscores.' => 'Kullanıcı adı sadece harf, sayı ve alt çizgi içerebilir.',
 'Yugoslavia' => 'Yugoslavya',
-);
+];
 ?>

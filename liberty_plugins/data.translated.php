@@ -5,6 +5,7 @@
  * @subpackage plugins_data
  */
 namespace Bitweaver\Liberty;
+
 use Bitweaver\KernelTools;
 
 // +----------------------------------------------------------------------+
@@ -39,7 +40,7 @@ $pluginParams = [
 	'description' => KernelTools::tra("This plugin is used to create a link to a page that contains a translation. The link can be shown as an Icon for the country or as an abreviation for the language."),
 	'help_function' => 'data_translated_help',
 	'syntax' => "{TRANSLATED page= lang= flag= }",
-	'plugin_type' => DATA_PLUGIN
+	'plugin_type' => DATA_PLUGIN,
 ];
 $gLibertySystem->registerPlugin( PLUGIN_GUID_DATATRANSLATED, $pluginParams );
 $gLibertySystem->registerDataTag( $pluginParams['tag'], PLUGIN_GUID_DATATRANSLATED );
@@ -59,16 +60,16 @@ function data_translated_help() {
 
 // Load Function
 function data_translated($data, $params) {
-    extract ($params, EXTR_SKIP);
-    if (!isset($page) ) {  // A Manditory Parameter is missing
-        $ret = 'The __page__ parameter was missing from the __~np~{TRANSLATED}~/np~__ plugin.';
+	extract ($params, EXTR_SKIP);
+	if (!isset($page) ) {  // A Manditory Parameter is missing
+		$ret = 'The __page__ parameter was missing from the __~np~{TRANSLATED}~/np~__ plugin.';
 		$ret.= data_translated_help();
-	    return $ret;
+		return $ret;
 	}
-    if (!isset($lang) ) {  // A Manditory Parameter is missing
-        $ret = 'The __lang__ parameter was missing from the __~np~{TRANSLATED}~/np~__ plugin.';
+	if (!isset($lang) ) {  // A Manditory Parameter is missing
+		$ret = 'The __lang__ parameter was missing from the __~np~{TRANSLATED}~/np~__ plugin.';
 		$ret.= data_translated_help();
-	    return $ret;
+		return $ret;
 	}
 
 	$img = '';
@@ -80,7 +81,7 @@ function data_translated($data, $params) {
 	}
 	if (isset($flag)) {
 		if (in_array($flag,$avflags)) {
-		    $file = USERS_PKG_URL . "icons/flags/" . $flag . ".gif";
+			$file = USERS_PKG_URL . "icons/flags/" . $flag . ".gif";
 			$img = "<img src='$file' width='18' height='13' vspace='0' hspace='3' alt='($lang)' align='baseline' />";
 		}
 	} else {

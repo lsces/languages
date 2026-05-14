@@ -1,7 +1,7 @@
 <?php
 // This language is the Polish translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '+1d' => '+1d',
 '+1m' => '+1m',
 '+7d' => '+7d',
@@ -2558,5 +2558,5 @@ $lang=Array(
 'You will receive an email with information to login for the first time into this site' => 'You will receive an email with information to login for the first time into this site',
 'You will remove' => 'You will remove',
 'zone' => 'zone',
-);
+];
 ?>

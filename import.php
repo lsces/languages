@@ -95,7 +95,7 @@ if (isset($_REQUEST["import"])) {
 		header ("Content-Disposition: attachment; filename=language-".$langCode.".php");
 		echo $data;
 		exit (0);
-	} else {
+	}
 		// This file MUST be name "...txt" for security reasons.
 		// if the file ended with .php - an evil editor could enter evil shit into a translation, and export it to your temp dir, and then execute it.
 		// XOXO spiderr
@@ -104,7 +104,6 @@ if (isset($_REQUEST["import"])) {
 		fwrite( $file, $data );
 		fclose( $file );
 		$impMsg['success'] = "Language file has been exported to <a href=\"".TEMP_PKG_URL.$fileName."\">$fileName</a>";
-	}
 
 	// unset this massive array to free up memory
 	unset( $gBitLanguage->mStrings[$_REQUEST['export_lang_code']] );
@@ -116,6 +115,6 @@ $gBitSmarty->assign('expLanguages', $expLanguages );
 
 $gBitSmarty->assign( 'impmsg', $impMsg );
 
-$gBitSystem->display( $mid, 'Languages Im/Export' , array( 'display_mode' => 'display' ));
+$gBitSystem->display( $mid, 'Languages Im/Export' , [ 'display_mode' => 'display' ]);
 
 ?>

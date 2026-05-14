@@ -1,7 +1,7 @@
 <?php
 // This language is the Hungarian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '+1d' => '+1n',
 '+1m' => '+1p',
 '+7d' => '+7n',
@@ -1726,5 +1726,5 @@ $lang=Array(
 'Your registration code:' => 'A regisztrációs kódja:',
 'You will remove' => 'Most törölném a',
 'zone' => 'Zóna',
-);
+];
 ?>

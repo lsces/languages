@@ -25,10 +25,9 @@
 // Usefull mode when preparing a translation for distribution.
 
 // http://www.neonchart.com/get_strings.php?nohelp&nosections
-// Prepare all languages for release 
+// Prepare all languages for release
 
-
-$lang=Array(
+$lang=[
 // ### start of untranslated words
 // ### uncomment value pairs as you translate
   "Child categories" => "Child categories",
@@ -3380,6 +3379,6 @@ $lang=Array(
   "Edit Templates" => "Edit templates",
   "Referer Stats" => "Referer stats",
   "Theme Control" => "Theme control",
-  "###end###"=>"###end###"
-);
+  "###end###"=>"###end###",
+];
 ?>

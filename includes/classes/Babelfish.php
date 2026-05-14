@@ -34,7 +34,7 @@ class Babelfish {
 		if (!isset($_SERVER['SERVER_PORT'])) {
 			return $rv;
 		}
-		
+
 		if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) {
 			if ($_SERVER['SERVER_PORT'] != 443) {
 				$rv .= ':' . $_SERVER['SERVER_PORT'];
@@ -47,7 +47,7 @@ class Babelfish {
 
 		return $rv;
 	}
-	
+
 	/**
 	 *	Return babelfish URL to translate \c $lang_from to \c $lang_to
 	 *
@@ -55,22 +55,22 @@ class Babelfish {
 	 * @param lang_to
 	 */
 	function url($lang_from, $lang_to) {
-		static $url_map = array(
+		static $url_map = [
 			'en'	=> 'english',
 			'fr'	=> 'french',
 			'de'	=> 'german',
 			'it'	=> 'italian',
 			'es'	=> 'spanish',
 			'pt'	=> 'portugese',
-		);
+		];
 
 		$lang_from = strtolower($lang_from);
 		$lang_to = strtolower($lang_to);
-		
+
 		if (!isset($url_map[$lang_from])) {
 			return '';
 		}
-		
+
 		$url = 'http://jump.altavista.com/translate_' . $url_map[$lang_from] . '.go' .
 			'?http://babelfish.altavista.com/babelfish/tr?doit=done' .
 			'&amp;lp=' . $lang_from . '_' . $lang_to .
@@ -91,8 +91,8 @@ class Babelfish {
 	 *	@param lang_from Language to translate from
 	 */
 	function links($lang_from = 'en') {
-		static $fishes = array(
-			'en' => array(	# English
+		static $fishes = [
+			'en' => [	# English
 				'de' => '&Uuml;bersetzen&nbsp;Sie&nbsp;diese&nbsp;Seite&nbsp;ins&nbsp;Deutsche',
 				'es' => 'Traduzca&nbsp;esta&nbsp;paginaci&oacute;n&nbsp;a&nbsp;espa&ntilde;ol',
 				'fr' => 'Traduisez&nbsp;cette&nbsp;page&nbsp;en&nbsp;fran&ccedil;ais',
@@ -101,28 +101,28 @@ class Babelfish {
 				'zh' => '&#x7ffb;&#x8bd1;&#x8fd9;&#x9875;&#x6210;&#x6c49;&#x8bed;&nbsp;(CN)',
 				'ja' => '&#x65e5;&#x672c;&#x8a9e;&#x306b;&#x3053;&#x306e;&#x30da;&#x30fc;&#x30b8;&#x3092;&#x7ffb;&#x8a33;&#x3057;&#x306a;&#x3055;&#x3044;&nbsp;(Nihongo)',
 				'ko' => '&#xd55c;&#xad6d;&#xc778;&#xc73c;&#xb85c;&nbsp;&#xc774;&nbsp;&#xd398;&#xc774;&#xc9c0;&#xb97c;&nbsp;&#xbc88;&#xc5ed;&#xd558;&#xc2ed;&#xc2dc;&#xc694;&nbsp;(Hangul)',
-			),
-			'fr' => array(	# French
+			],
+			'fr' => [	# French
 				'de' => '&Uuml;bersetzen&nbsp;Sie&nbsp;diese&nbsp;Seite&nbsp;in&nbsp;Deutschen',
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
-			),
-			'de' => array(	# German
+			],
+			'de' => [	# German
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
 				'fr' => 'Traduisez&nbsp;cette&nbsp;page&nbsp;en&nbsp;fran&ccedil;ais',
-			),
-			'it' => array(	# Italian
+			],
+			'it' => [	# Italian
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
-			),
-			'es' => array(	# Spanish
+			],
+			'es' => [	# Spanish
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
-			),
-			'pt' => array(	# Portugese
+			],
+			'pt' => [	# Portugese
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
-			),
-			'ru' => array(	# Russian
+			],
+			'ru' => [	# Russian
 				'en' => 'Translate&nbsp;this&nbsp;page&nbsp;into&nbsp;English',
-			),
-		);
+			],
+		];
 
 		// \todo Use phpsniff or PEAR's Net_UserAgent_Detect to detect the browser type
 		// as Netscape 4.x and possibly others displays '&#xabcd;' literally
@@ -139,9 +139,9 @@ class Babelfish {
 
 		$a = [];
 		foreach ($fishes[$lang_from] as $lang_to => $msg) {
-			$a[] = array('target' => $lang_to,
-                         'href'   => Babelfish::url($lang_from, $lang_to),
-                         'msg'    => $msg);
+			$a[] = ['target' => $lang_to,
+						 'href'   => Babelfish::url($lang_from, $lang_to),
+						 'msg'    => $msg, ];
 		}
 
 		return $a;

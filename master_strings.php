@@ -20,18 +20,18 @@ $gBitSmarty->assign( 'languages', $languages );
 $feedback = $masterMsg = [];
 
 if( !empty( $_REQUEST['source_hash'] ) && !is_array( $_REQUEST['source_hash'] ) ) {
-	$_REQUEST['source_hash'] = array( $_REQUEST['source_hash'] );
+	$_REQUEST['source_hash'] = [ $_REQUEST['source_hash'] ];
 }
 
 if( !empty( $_REQUEST['delete_master'] ) && !empty( $_REQUEST['source_hash'] ) ) {
 	if( empty( $_REQUEST['confirm'] ) ) {
 		$gBitSystem->setBrowserTitle( tra( 'Confirm Delete' ) );
 		$formHash['delete_master'] = true;
-		$msgHash = array(
+		$msgHash = [
 			'label' => tra( 'Delete Master Strings' ),
 			'warning' => tra( 'This will remove the language master string. If you are tracking translations and the string is still used, it will be inserted again, however, any translations associated with it will be lost.' ),
 			'confirm_item' => tra( "The following Master Strings will be removed" ).":",
-		);
+		];
 		foreach( $_REQUEST['source_hash'] as $source_hash ) {
 			$gBitLanguage->loadMasterStrings( $source_hash );
 			$formHash['input'][] = '<input type="hidden" name="source_hash[]" value="'.$source_hash.'"/>'.htmlentities( $gBitLanguage->mStrings['master'][$source_hash]['source'] );
@@ -67,7 +67,7 @@ if( !empty( $_REQUEST['delete_master'] ) && !empty( $_REQUEST['source_hash'] ) )
 			$newSourceHash = $gBitLanguage->getSourceHash( $_REQUEST['edit_master'][$sourceHash] );
 			$gBitLanguage->loadMasterStrings();
 			if( $newSourceHash != $sourceHash ) {
-				if( $gBitLanguage->storeMasterString( array( 'source_hash' => $sourceHash, 'new_source' => $_REQUEST['edit_master'][$sourceHash] ) ) ) {
+				if( $gBitLanguage->storeMasterString( [ 'source_hash' => $sourceHash, 'new_source' => $_REQUEST['edit_master'][$sourceHash] ] ) ) {
 					unset( $_REQUEST['source_hash'] );
 					$_REQUEST['source_hash'][] = $newSourceHash;
 					$tranStrings[$newSourceHash] = $gBitLanguage->getTranslatedStrings( $newSourceHash );
@@ -85,7 +85,7 @@ if( !empty( $_REQUEST['delete_master'] ) && !empty( $_REQUEST['source_hash'] ) )
 	$gBitLanguage->loadMasterStrings(
 		null,
 		( !empty( $_REQUEST['filter'] ) ? $_REQUEST['filter'] : null ),
-		( !empty( $_REQUEST['filter_lang'] ) ? $_REQUEST['filter_lang'] : null )
+		( !empty( $_REQUEST['filter_lang'] ) ? $_REQUEST['filter_lang'] : null ),
 	);
 
 	// work out what strings to display
@@ -110,7 +110,6 @@ if( !empty( $_REQUEST['delete_master'] ) && !empty( $_REQUEST['source_hash'] ) )
 	$gBitSmarty->assign( 'masterStrings', $masterStrings );
 }
 
-
 if( !empty( $_REQUEST['source_hash'] ) && empty( $_REQUEST['cancel'] ) ) {
 	foreach( $_REQUEST['source_hash'] as $reqSourceHash ) {
 		$gBitLanguage->loadMasterStrings( $reqSourceHash );
@@ -127,5 +126,5 @@ if( !empty( $_REQUEST['source_hash'] ) && empty( $_REQUEST['cancel'] ) ) {
 // Display the template
 $gBitSmarty->assign( 'masterMsg', $masterMsg );
 $gBitSmarty->assign( 'feedback', $feedback );
-$gBitSystem->display( 'bitpackage:languages/language_master_strings.tpl', 'Edit Master Strings' , array( 'display_mode' => 'display' ));
+$gBitSystem->display( 'bitpackage:languages/language_master_strings.tpl', 'Edit Master Strings' , [ 'display_mode' => 'display' ]);
 ?>

@@ -1,7 +1,7 @@
 <?php
 // This language is the Slovenian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 'action' => 'akcija',
 'Actions' => 'Akcije',
 'Active watches' => 'Aktivni zaznamki',
@@ -630,5 +630,5 @@ $lang=Array(
 'Publish Date' => 'Datum objave',
 'Puerto Rico' => 'Puerto Riko',
 'Puerto_Rico' => 'Puerto Riko',
-);
+];
 ?>

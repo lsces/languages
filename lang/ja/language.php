@@ -1,7 +1,7 @@
 <?php
 // This language is the Japanese translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '-1日間',
 '+1d' => '+1日',
 '-1m' => '-1ヶ月間',
@@ -1692,5 +1692,5 @@ image in your browser using',
 'Your email address was removed from the list of subscriptors.' => 'Your
 email address was removed from the list of subscriptors.',
 'Your personal Wiki Page' => '自分のWikiページ',
-);
+];
 ?>

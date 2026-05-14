@@ -7,6 +7,7 @@
  */
 
 namespace Bitweaver\Languages;
+
 use Bitweaver\BitBase;
 use Bitweaver\Liberty\LibertyBase;
 
@@ -23,13 +24,13 @@ use Bitweaver\Liberty\LibertyBase;
 		global $gBitSystem, $gBitLanguage;
 		$ret = [];
 		if( BitBase::verifyId( $this->mContentId ) ) {
-			$translationId = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", array( $this->mContentId ) );
+			$translationId = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", [ $this->mContentId ] );
 			if( BitBase::verifyId( $translationId ) ) {
 				$query = "SELECT lc.`content_id`, lc.`title`, lc.`lang_code`, ictm.`translation_id`
 					FROM `".BIT_DB_PREFIX."i18n_content_trans_map` ictm
 						INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON( lc.`content_id`=ictm.`content_id` )
 					WHERE ictm.`translation_id`=?";
-				$result = $this->mDb->query( $query, array( $translationId ) );
+				$result = $this->mDb->query( $query, [ $translationId ] );
 				while( $aux = $result->fetchRow() ) {
 					// default to site language
 					if( empty( $aux['lang_code'] )) {
@@ -60,7 +61,7 @@ use Bitweaver\Liberty\LibertyBase;
 
 		// make sure we don't have a translation_id for this content yet
 		if( BitBase::verifyId( $pParamHash['from_id'] ?? 0 ) ) {
-			$pParamHash['translation_id'] = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", array( $pParamHash['from_id'] ) );
+			$pParamHash['translation_id'] = $this->mDb->getOne( "SELECT `translation_id` FROM `".BIT_DB_PREFIX."i18n_content_trans_map` WHERE `content_id`=?", [ $pParamHash['from_id'] ] );
 		}
 
 		// if we have this page in this translation, we should inform the user somehow.
@@ -157,7 +158,7 @@ die;
 function translation_content_store( $pObject, $pParamHash ) {
 	// if we are creating this content and we have a from_id, we know that we're translating a page
 	// mInfo['content_id'] isn't set when content is created
-    if( empty( $pObject->mInfo['content_id'] ) && BitBase::verifyId( $_REQUEST['i18n']['from_id'] ?? 0 ) ) {
+	if( empty( $pObject->mInfo['content_id'] ) && BitBase::verifyId( $_REQUEST['i18n']['from_id'] ?? 0 ) ) {
 		$trans = new LibertyTranslations();
 		$storeHash = $_REQUEST['i18n'];
 		$storeHash['content_id'] = $pParamHash['content_id'];

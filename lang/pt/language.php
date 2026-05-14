@@ -1,7 +1,7 @@
 <?php
 // This language is the Portuguese translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '-1d',
 '+1d' => '+1d',
 '-1m' => '-1m',
@@ -3251,5 +3251,5 @@ o ficheiro de mapa:',
 'You will receive an email with information to login for the first time into this site' => 'Você receberá um email com instruções sobre como logar-se pela primeira vez neste site',
 'You will remove' => 'Irá remover',
 'zone' => 'Zona',
-);
+];
 ?>

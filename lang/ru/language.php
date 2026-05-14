@@ -1,7 +1,7 @@
 <?php
 // This language is the Russian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '#' => '№',
 '+1d' => '+1д',
 '1 -Lowest-' => '1 -Самый Низкий-',
@@ -4705,4 +4705,4 @@ or use the image URL to include images using the WYSIWYG editor. ' => 'Если 
 'You will see this name show up<ul><li>when you want to assign the module</li><li>in the \'div\' surrounding the module (for css customisation)</li></ul>' => 'Вы увидете это имя<ul><li>когда вы назначаете модуль</li><li>в \'div\' окружающем модуль (для редактирования css)</li></ul>',
 'zone' => 'зона',
 'создать Wiki Page' => 'создать вики-страницу',
-);
+];

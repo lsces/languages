@@ -1,7 +1,7 @@
 <?php
 // This language is the Arabic translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 'activity' => 'نشاط',
 'Activity name already exists' => 'اسم الفعالية موجود سلفاً',
 'Add' => 'اضف',
@@ -495,5 +495,5 @@ $lang=Array(
 'Your admin password has been changed' => 'كلمة السر الاشرافية تم تعديلها',
 'Your email was sent' => 'قد ارسلت رسالتك',
 'You will receive an email with information to login for the first time into this site' => 'سوف تصلك رسالة على البريد الالكتروني تحوي معلومات لدخولك لأول مرة على هذا الموقع ',
-);
+];
 ?>

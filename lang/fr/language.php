@@ -1,7 +1,7 @@
 <?php
 // This language is the French translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '-1j',
 '+1d' => '+1j',
 '-1m' => '-1m',
@@ -4526,4 +4526,4 @@ fichier-carte :',
 'Zimbabwe' => 'Zimbabwe',
 'zip' => 'code postal',
 'zone' => 'zone',
-);
+];

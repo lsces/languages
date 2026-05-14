@@ -10,8 +10,8 @@
  */
 
 namespace Bitweaver\Liberty;
+
 use Bitweaver\KernelTools;
-use Bitweaver\Liberty\LibertyContent;
 
 /**
  * Setup Code
@@ -28,7 +28,7 @@ $pluginParams = [
 	'description'   => KernelTools::tra( "Use this plugin to mark strings for translation. You should only use this for common short strings, and not entire pages." ),
 	'help_function' => 'data_tr_help',
 	'syntax'        => "",
-	'plugin_type'   => DATA_PLUGIN
+	'plugin_type'   => DATA_PLUGIN,
 ];
 $gLibertySystem->registerPlugin( PLUGIN_GUID_DATATR, $pluginParams );
 $gLibertySystem->registerDataTag( $pluginParams['tag'], PLUGIN_GUID_DATATR );

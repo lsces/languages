@@ -1,7 +1,7 @@
 <?php
 // This language is the Ukrainian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '-1d',
 '+1d' => '+1д',
 '-1m' => '-1m',
@@ -2723,5 +2723,5 @@ $lang=Array(
 'You will receive an email with information to login for the first time into this site' => 'Ви отримаєте листа з інформацією про те, як зареєструватись (ввійти) на майднанчику вперше',
 'You will remove' => 'Ви видалите',
 'zone' => 'зона',
-);
+];
 ?>

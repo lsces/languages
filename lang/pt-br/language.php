@@ -1,7 +1,7 @@
 <?php
 // This language is the Brazilian Portuguese translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '-1d' => '-1d',
 '+1d' => '+1d',
 '-1m' => '-1m',
@@ -3647,5 +3647,5 @@ o arquivo de mapa:',
 'Yugoslavia' => 'Iugoslávia',
 'Zambia' => 'Zambia',
 'zone' => 'Zona',
-);
+];
 ?>

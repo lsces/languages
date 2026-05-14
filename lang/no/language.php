@@ -1,7 +1,7 @@
 <?php
 // This language is the Norwegian translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '+1d' => '+1d',
 '1 -Lowest-' => '1 -Lavest-',
 '+1m' => '+1m',
@@ -3246,5 +3246,5 @@ $lang=Array(
 'Zambia' => 'Zambia',
 'Zimbabwe' => 'Zimbabwe',
 'zone' => 'zon',
-);
+];
 ?>

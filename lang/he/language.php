@@ -1,5 +1,5 @@
 <?php // -*- coding:utf-8 -*-
-$lang=Array(
+$lang=[
 "User_versions_for" => "גרס�ות משתמש עבור",
 "Version" => "גרסה",
 "Date" => "ת�ריך",
@@ -2961,5 +2961,5 @@ Set optional paramater -+ln+- to 1 if you need line numbering feature.",//perhap
 "There is an error in the plugin data" => "There is an error in the plugin data",
 "Change your email" => "Change your email",
 "Edit this assigned module:" => "Edit this assigned module:",
-"##end###" => "###end###");
+"##end###" => "###end###", ];
 ?>

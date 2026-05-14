@@ -29,16 +29,15 @@ if( !empty( $_REQUEST['un_trans'] ) ) {
 	$gBitSmarty->assign( 'unTrans', 1 );
 }
 
-
 if( isset( $_REQUEST['save_translations'] ) ) {
 	$editLang = $_REQUEST['lang'];
 	$gBitLanguage->loadLanguage( $editLang );
 	$storedStrings = null;
 	foreach( $_REQUEST['edit_trans'] as $sourceHash => $string ) {
 		if( $string != $gBitLanguage->mStrings[$editLang][$sourceHash]['trans'] ) {
-			// we need to remove the $_REQUEST slashes here to avoid stuff like: 
-			// {$gBitSystem->getConfig(\'stuff\')} in the translated strings - 
-			// it will kill the site since smarty won't be able to interpret 
+			// we need to remove the $_REQUEST slashes here to avoid stuff like:
+			// {$gBitSystem->getConfig(\'stuff\')} in the translated strings -
+			// it will kill the site since smarty won't be able to interpret
 			// the template anymore --xing
 			if( ini_get( 'magic_quotes_gpc' ) ) {
 				$string = stripslashes( $string );
@@ -94,5 +93,5 @@ if( !empty( $_REQUEST['hash'] ) ) {
 	$gBitSmarty->assign( 'tranStrings', $tranStrings );
 }
 
-$gBitSystem->display( 'bitpackage:languages/translate_strings.tpl', tra( 'Edit Translations' ) , array( 'display_mode' => 'edit' ));
+$gBitSystem->display( 'bitpackage:languages/translate_strings.tpl', tra( 'Edit Translations' ) , [ 'display_mode' => 'edit' ]);
 

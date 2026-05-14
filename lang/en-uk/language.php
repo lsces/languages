@@ -1,7 +1,7 @@
 <?php
 // This language is the  translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 'background color of the node
 ' => 'background colour of the node
 ',
@@ -16,5 +16,5 @@ $lang=Array(
 ' => 'the background colour, use #rrvvbb colour types.
 ',
 'Will display using the indicated HTML color' => 'Will display using the indicated HTML colour',
-);
+];
 ?>

@@ -5,7 +5,7 @@
  * @package languages
  * @subpackage modules
  * @version $Header$
- */ 
+ */
 global $gBitLanguage, $gBitUser;
 //vd($_COOKIE);
 //vd($_SESSION);

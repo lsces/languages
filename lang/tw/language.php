@@ -1,7 +1,7 @@
 <?php
 // This language is the Traditional Chinese translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:08
-$lang=Array(
+$lang=[
 '+1d' => '+1天',
 '+1m' => '+1月',
 '+7d' => '+7天',
@@ -2719,5 +2719,5 @@ $lang=Array(
 'You will receive an email with your password soon' => '你很快就會收到含有密碼的 email',
 'You will remove' => '將會移除',
 'zone' => '區域',
-);
+];
 ?>

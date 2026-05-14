@@ -1,7 +1,7 @@
 <?php
 // This language is the Danish translation of bitweaver and
 // it was exported from the bitweaver database on 2008-08-25 08:07
-$lang=Array(
+$lang=[
 '+1d' => '+1d',
 '+1m' => '+1m',
 '+7d' => '+7d',
@@ -2716,5 +2716,5 @@ $lang=Array(
 'You will receive an email with your password soon' => 'Du vil snart modtage en email med dine adgangskoder',
 'You will remove' => 'Du vil fjerne',
 'zone' => 'Zone',
-);
+];
 ?>
