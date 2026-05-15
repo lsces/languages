@@ -11,6 +11,7 @@
 /**
  * Initialization
  */
+use Bitweaver\KernelTools;
 require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_edit_master' );
@@ -25,12 +26,12 @@ if( !empty( $_REQUEST['source_hash'] ) && !is_array( $_REQUEST['source_hash'] ) 
 
 if( !empty( $_REQUEST['delete_master'] ) && !empty( $_REQUEST['source_hash'] ) ) {
 	if( empty( $_REQUEST['confirm'] ) ) {
-		$gBitSystem->setBrowserTitle( tra( 'Confirm Delete' ) );
+		$gBitSystem->setBrowserTitle( KernelTools::tra( 'Confirm Delete' ) );
 		$formHash['delete_master'] = true;
 		$msgHash = [
-			'label' => tra( 'Delete Master Strings' ),
-			'warning' => tra( 'This will remove the language master string. If you are tracking translations and the string is still used, it will be inserted again, however, any translations associated with it will be lost.' ),
-			'confirm_item' => tra( "The following Master Strings will be removed" ).":",
+			'label' => KernelTools::tra( 'Delete Master Strings' ),
+			'warning' => KernelTools::tra( 'This will remove the language master string. If you are tracking translations and the string is still used, it will be inserted again, however, any translations associated with it will be lost.' ),
+			'confirm_item' => KernelTools::tra( "The following Master Strings will be removed" ).":",
 		];
 		foreach( $_REQUEST['source_hash'] as $source_hash ) {
 			$gBitLanguage->loadMasterStrings( $source_hash );

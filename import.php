@@ -12,6 +12,7 @@
 /**
  * Initialization
  */
+use Bitweaver\KernelTools;
 require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_import' );
@@ -57,7 +58,7 @@ if (isset($_REQUEST["import"])) {
 
 	if( ($_REQUEST['overwrite'] == 'r') && !empty( $gBitLanguage->mImportConflicts ) ) {
 		unset( $impMsg['error'] );
-		$impMsg['warning'][] = tra( "Conflicts occured during language import" );
+		$impMsg['warning'][] = KernelTools::tra( "Conflicts occured during language import" );
 		$gBitSmarty->assign( 'impConflicts', $gBitLanguage->mImportConflicts );
 		$mid = 'bitpackage:languages/import_resolve.tpl';
 	}

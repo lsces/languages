@@ -13,6 +13,7 @@
 /**
  * Initialization
  */
+use Bitweaver\KernelTools;
 require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_edit' );
@@ -53,7 +54,7 @@ if( isset( $_REQUEST['save_translations'] ) ) {
 	$gBitSmarty->assign('tranStrings', $tranStrings );
 	$gBitSmarty->assign( 'lang', $editLang );
 	$gBitSmarty->assign( 'translate', true );
-	$gBitSmarty->assign( 'saveSuccess', tra( "The following items have been saved successfully" ).":" );
+	$gBitSmarty->assign( 'saveSuccess', KernelTools::tra( "The following items have been saved successfully" ).":" );
 	$gBitSmarty->assign( 'storedStrings', $storedStrings );
 }
 
@@ -93,5 +94,5 @@ if( !empty( $_REQUEST['hash'] ) ) {
 	$gBitSmarty->assign( 'tranStrings', $tranStrings );
 }
 
-$gBitSystem->display( 'bitpackage:languages/translate_strings.tpl', tra( 'Edit Translations' ) , [ 'display_mode' => 'edit' ]);
+$gBitSystem->display( 'bitpackage:languages/translate_strings.tpl', KernelTools::tra( 'Edit Translations' ) , [ 'display_mode' => 'edit' ]);
 

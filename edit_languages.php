@@ -13,6 +13,7 @@
 /**
  * Initialization
  */
+use Bitweaver\KernelTools;
 require_once '../kernel/includes/setup_inc.php';
 
 $gBitSystem->verifyPermission( 'p_languages_edit' );
@@ -31,7 +32,7 @@ if( !empty( $_REQUEST['un_trans'] ) ) {
 
 if( !empty( $_REQUEST['clear_cache'] ) ) {
 	$gBitLanguage->clearCache();
-	$gBitSmarty->assign( 'saveSuccess', tra( 'System template and language cache have been cleared.' ) );
+	$gBitSmarty->assign( 'saveSuccess', KernelTools::tra( 'System template and language cache have been cleared.' ) );
 } elseif( !empty( $_REQUEST['translate'] ) ) {
 	$editLang = $_REQUEST['lang'];
 	$gBitSmarty->assign( 'lang', $editLang );
@@ -77,9 +78,9 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 			$formHash['delete_lang_code'] = $_REQUEST['lang'];
 			$formHash['delete_language'] = true;
 			$msgHash = [
-				'label' => tra('Delete Language'),
-				'confirm_item' => tra('Are you sure you want to remove this language?') . ' ' . $languages[$_REQUEST['lang']]['native_name'],
-				'warning' => tra('This will permanently remove the languages and all translations.'),
+				'label' => KernelTools::tra('Delete Language'),
+				'confirm_item' => KernelTools::tra('Are you sure you want to remove this language?') . ' ' . $languages[$_REQUEST['lang']]['native_name'],
+				'warning' => KernelTools::tra('This will permanently remove the languages and all translations.'),
 			];
 			$gBitSystem->confirmDialog( $formHash,$msgHash );
 		}
@@ -87,7 +88,7 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 } elseif( isset( $_REQUEST["save_language"] ) && $gBitUser->hasPermission( 'p_languages_create' ) ) {
 	if( $gBitLanguage->storeLanguage( $_REQUEST ) ) {
 		$languages = $gBitLanguage->listLanguages();
-		$gBitSmarty->assign( 'saveSuccess', tra( 'The language has been saved.' ) );
+		$gBitSmarty->assign( 'saveSuccess', KernelTools::tra( 'The language has been saved.' ) );
 		$gBitSmarty->assign( 'defaults', $_REQUEST );
 	} else {
 		$gBitSmarty->assign( 'saveErrors', $gBitLanguage->mErrors );
@@ -103,6 +104,6 @@ if( !empty( $_REQUEST['clear_cache'] ) ) {
 	$gBitSmarty->assign( 'editDescription', true );
 }
 
-$gBitSystem->display( 'bitpackage:languages/edit_languages.tpl', tra( 'Edit Languages' ) , [ 'display_mode' => 'edit' ]);
+$gBitSystem->display( 'bitpackage:languages/edit_languages.tpl', KernelTools::tra( 'Edit Languages' ) , [ 'display_mode' => 'edit' ]);
 
 ?>
