@@ -575,7 +575,7 @@ class BitLanguage extends BitSingleton {
 		$ret = $pString;
 		$sourceHash = $this->getSourceHash( $pString );
 		$cacheFile = TEMP_PKG_PATH."lang/".$this->mLanguage."/".$sourceHash;
-		if( $this->mLanguage == 'en' ) {
+		if( empty( $this->mLanguage ) || $this->mLanguage === 'en' ) {
 			return $ret;
 		}
 		if( !empty( $this->mStrings[$this->mLanguage][$sourceHash] ) ) {
